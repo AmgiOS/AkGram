@@ -9,7 +9,8 @@ target 'AkGram' do
 	pod 'Firebase/Core'
     pod 'Firebase/Auth'
     pod 'Firebase/Database'
-
+    pod 'Firebase/Storage'
+    
   target 'AkGramTests' do
     inherit! :search_paths
     # Pods for testing

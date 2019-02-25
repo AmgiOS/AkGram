@@ -7,22 +7,23 @@
 //
 
 import UIKit
-import FirebaseAuth
-import FirebaseDatabase
 
 class SignUpViewController: UIViewController {
+    //MARK: - Vars
+    let signUpService = SignUpService()
+    let imagePicker = UIImagePickerController()
+    var selectedImage = UIImage()
 
     //MARK: - @IBOutlet
     @IBOutlet weak var pictureImageView: UIImageView!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var signUpButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpTextField(usernameTextField)
-        setUpTextField(emailTextField)
-        setUpTextField(passwordTextField)
+        setUp()
     }
     
     //MARK: - @IBAction
@@ -31,20 +32,65 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signUpbutton(_ sender: Any) {
-        guard let email = emailTextField.text else { return }
+        guard let username = usernameTextField.text, let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
-        signUp(email, password)
+//        check password count < 6 elements
+        let imageJPEG = UIImage.jpegData(selectedImage)(compressionQuality: 0.1)
+        signUpService.signUp(username, email, password, imageJPEG ?? Data()) { (success) in
+            if success {
+                self.performSegue(withIdentifier: "signInToTabBar", sender: nil)
+            } else {
+                print("error to sign up")
+            }
+        }
+    }
+}
+
+extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    //MARK: - ImagePicker
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+        selectedImage = originalImage
+        pictureImageView.image = originalImage
+        dismiss(animated: true, completion: nil)
+    }
+    
+    private func ProfilePhoto() {
+        pictureImageView.isUserInteractionEnabled = true
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGesturePicture))
+        pictureImageView.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    @objc func tapGesturePicture() {
+        self.imagePicker.sourceType = .photoLibrary
+        self.present(imagePicker, animated: true, completion: nil)
     }
 }
 
 extension SignUpViewController {
-    //MARK: -Functions
-    private func signUp(_ email: String, _ password: String) {
-        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-            guard let user = user, error != nil else {
-                print(error?.localizedDescription ?? "")
-                return
-            }
+    //MARK: - Functions
+    private func setUp() {
+        setUpTextField(usernameTextField)
+        setUpTextField(emailTextField)
+        setUpTextField(passwordTextField)
+        ProfilePhoto()
+        handleTextField()
+        imagePicker.delegate = self
+    }
+    
+    private func handleTextField() {
+        usernameTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        emailTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+    }
+    
+    @objc func textFieldDidChange() {
+        guard let username = usernameTextField.text, !username.isEmpty, let email = emailTextField.text, !email.isEmpty, let password = passwordTextField.text, !password.isEmpty else {
+            signUpButton.setTitleColor(UIColor.lightGray, for: .normal)
+            signUpButton.isEnabled = false
+            return
         }
+        signUpButton.setTitleColor(UIColor.white, for: .normal)
+        signUpButton.isEnabled = true
     }
 }

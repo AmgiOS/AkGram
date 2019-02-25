@@ -48,10 +48,10 @@
                                             <constraint firstAttribute="height" constant="50" id="9VD-mZ-JDh"/>
                                         </constraints>
                                         <state key="normal" title="Sign In">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="lNs-Xj-2bR" kind="presentation" id="vAI-8Y-qd1"/>
+                                            <action selector="signInButton:" destination="9pF-At-NST" eventType="touchUpInside" id="L1T-mJ-NZS"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -90,6 +90,8 @@
                     <connections>
                         <outlet property="emailTextfield" destination="DTd-fZ-72R" id="abb-xu-fZN"/>
                         <outlet property="passwordTextfield" destination="WSH-mH-Sfd" id="8WE-eo-pvl"/>
+                        <outlet property="signInButton" destination="aTL-aZ-EHQ" id="Ol6-BX-Pzp"/>
+                        <segue destination="lNs-Xj-2bR" kind="presentation" identifier="signInToTabBar" id="lmN-Lj-LrN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9D8-uB-MKB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -115,7 +117,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" textContentType="email"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cAD-Pf-SY9">
                                         <rect key="frame" x="0.0" y="75" width="345" height="35"/>
@@ -125,7 +127,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" textContentType="email"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kFa-tx-m8O">
                                         <rect key="frame" x="0.0" y="150" width="345" height="35"/>
@@ -144,7 +146,7 @@
                                             <constraint firstAttribute="height" constant="50" id="VdI-zS-eQs"/>
                                         </constraints>
                                         <state key="normal" title="Sign Up">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="signUpbutton:" destination="zKd-Nf-brf" eventType="touchUpInside" id="EIB-GH-5D0"/>
@@ -161,8 +163,8 @@
                                     <action selector="dissmissView:" destination="zKd-Nf-brf" eventType="touchUpInside" id="pA6-aA-hax"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderImg" translatesAutoresizingMaskIntoConstraints="NO" id="luv-VH-J8P">
-                                <rect key="frame" x="75" y="50" width="225" height="116"/>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderImg" translatesAutoresizingMaskIntoConstraints="NO" id="luv-VH-J8P">
+                                <rect key="frame" x="130" y="50" width="115" height="116"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -172,6 +174,7 @@
                             <constraint firstItem="x8w-JM-Xfz" firstAttribute="top" secondItem="luv-VH-J8P" secondAttribute="bottom" constant="30" id="Xvp-ag-pSc"/>
                             <constraint firstItem="jiU-hH-zHa" firstAttribute="leading" secondItem="UoA-xu-F96" secondAttribute="leading" constant="15" id="Yti-Ly-RhZ"/>
                             <constraint firstItem="x8w-JM-Xfz" firstAttribute="centerX" secondItem="dzD-5a-j3O" secondAttribute="centerX" id="fYL-bF-XEe"/>
+                            <constraint firstItem="luv-VH-J8P" firstAttribute="leading" secondItem="UoA-xu-F96" secondAttribute="leading" constant="130" id="gS3-Kf-gc8"/>
                             <constraint firstItem="x8w-JM-Xfz" firstAttribute="centerY" secondItem="dzD-5a-j3O" secondAttribute="centerY" id="osA-35-hk9"/>
                             <constraint firstItem="jiU-hH-zHa" firstAttribute="bottom" secondItem="UoA-xu-F96" secondAttribute="bottom" constant="-10" id="pK5-s7-Kj0"/>
                             <constraint firstItem="UoA-xu-F96" firstAttribute="trailing" secondItem="x8w-JM-Xfz" secondAttribute="trailing" constant="15" id="vBi-0f-TQs"/>
@@ -183,7 +186,9 @@
                         <outlet property="emailTextField" destination="cAD-Pf-SY9" id="bWn-IT-8sh"/>
                         <outlet property="passwordTextField" destination="kFa-tx-m8O" id="OHS-SL-nxj"/>
                         <outlet property="pictureImageView" destination="luv-VH-J8P" id="b2A-nP-85m"/>
+                        <outlet property="signUpButton" destination="yVz-Rm-jGs" id="0sU-uA-gcm"/>
                         <outlet property="usernameTextField" destination="Hc0-BW-fg1" id="1J5-fV-ztZ"/>
+                        <segue destination="lNs-Xj-2bR" kind="presentation" identifier="signInToTabBar" id="jvQ-96-KH0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pfW-au-2Vi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -202,4 +207,7 @@
     <resources>
         <image name="placeholderImg" width="225" height="225"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="jvQ-96-KH0"/>
+    </inferredMetricsTieBreakers>
 </document>
