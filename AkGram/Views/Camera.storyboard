@@ -17,10 +17,65 @@
                     <view key="view" contentMode="scaleToFill" id="ojV-0x-g7R">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghV-qO-9iC">
+                                <rect key="frame" x="0.0" y="64" width="375" height="123"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Placeholder-image" translatesAutoresizingMaskIntoConstraints="NO" id="1kn-XZ-6NS">
+                                        <rect key="frame" x="5" y="15" width="120" height="93"/>
+                                    </imageView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ckL-N4-mKW">
+                                        <rect key="frame" x="130" y="15" width="240" height="93"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="tintColor" red="0.98000001910000001" green="0.97111250680000005" blue="0.95083967940000003" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="ckL-N4-mKW" secondAttribute="bottom" constant="15" id="OPG-Hg-G23"/>
+                                    <constraint firstItem="1kn-XZ-6NS" firstAttribute="leading" secondItem="ghV-qO-9iC" secondAttribute="leading" constant="5" id="QLY-Ue-ORV"/>
+                                    <constraint firstItem="ckL-N4-mKW" firstAttribute="centerY" secondItem="ghV-qO-9iC" secondAttribute="centerY" id="YZ9-dZ-pUN"/>
+                                    <constraint firstAttribute="trailing" secondItem="ckL-N4-mKW" secondAttribute="trailing" constant="5" id="csO-wG-Xwg"/>
+                                    <constraint firstItem="1kn-XZ-6NS" firstAttribute="centerY" secondItem="ghV-qO-9iC" secondAttribute="centerY" id="dEn-fu-v8U"/>
+                                    <constraint firstAttribute="trailing" secondItem="1kn-XZ-6NS" secondAttribute="trailing" constant="250" id="fmx-Qr-5lg"/>
+                                    <constraint firstAttribute="bottom" secondItem="1kn-XZ-6NS" secondAttribute="bottom" constant="15" id="w2c-EP-8S2"/>
+                                    <constraint firstItem="ckL-N4-mKW" firstAttribute="leading" secondItem="1kn-XZ-6NS" secondAttribute="trailing" constant="5" id="zYQ-SW-Pzx"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XWV-1S-chb">
+                                <rect key="frame" x="15" y="602" width="345" height="50"/>
+                                <color key="backgroundColor" red="0.053121034263959421" green="0.053121034263959421" blue="0.053121034263959421" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="f4o-FP-lHZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Share">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="sharePostButton:" destination="rIV-st-ycb" eventType="touchUpInside" id="5Vj-Ip-JhK"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.94143248777251132" green="0.98903181058705925" blue="1" alpha="0.97623073630136981" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="XWV-1S-chb" firstAttribute="leading" secondItem="uoH-MG-JVM" secondAttribute="leading" constant="15" id="7U2-1f-25e"/>
+                            <constraint firstItem="ghV-qO-9iC" firstAttribute="leading" secondItem="uoH-MG-JVM" secondAttribute="leading" id="BpN-O4-MK2"/>
+                            <constraint firstItem="XWV-1S-chb" firstAttribute="centerX" secondItem="ojV-0x-g7R" secondAttribute="centerX" id="J1X-vG-a4u"/>
+                            <constraint firstItem="uoH-MG-JVM" firstAttribute="bottom" secondItem="XWV-1S-chb" secondAttribute="bottom" constant="15" id="SV5-X6-EEB"/>
+                            <constraint firstItem="ghV-qO-9iC" firstAttribute="top" secondItem="uoH-MG-JVM" secondAttribute="top" id="YWF-0y-agR"/>
+                            <constraint firstItem="ghV-qO-9iC" firstAttribute="trailing" secondItem="uoH-MG-JVM" secondAttribute="trailing" id="g4h-rz-2ft"/>
+                            <constraint firstItem="uoH-MG-JVM" firstAttribute="bottom" secondItem="ghV-qO-9iC" secondAttribute="bottom" constant="480" id="t2k-86-8mr"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="uoH-MG-JVM"/>
                     </view>
                     <navigationItem key="navigationItem" title="Camera" id="cJE-M1-VsF"/>
+                    <connections>
+                        <outlet property="captionTextView" destination="ckL-N4-mKW" id="4vt-q3-RRb"/>
+                        <outlet property="photoImageView" destination="1kn-XZ-6NS" id="rt9-b0-vN4"/>
+                        <outlet property="shareButton" destination="XWV-1S-chb" id="Z5T-Hb-eqP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cz4-jc-qmo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -50,5 +105,6 @@
     </scenes>
     <resources>
         <image name="Photo" width="22" height="23"/>
+        <image name="Placeholder-image" width="840" height="600"/>
     </resources>
 </document>

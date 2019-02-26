@@ -16,10 +16,10 @@ class SignUpService {
     let idStorage = "gs://akgram-31c3b.appspot.com"
     
     //MARK: - Functions
-    func signUp(_ username: String, _ email: String, _ password: String, _ imageJPEG: Data, onSuccess: @escaping (Bool) -> Void) {
+    func signUp(_ username: String, _ email: String, _ password: String, _ imageJPEG: Data, onSuccess: @escaping (Bool) -> Void, OnError: @escaping (String?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
             guard let user = user?.user.uid, error == nil else {
-                print(error?.localizedDescription ?? "")
+                OnError(error?.localizedDescription ?? "")
                 onSuccess(false)
                 return
             }
@@ -28,6 +28,7 @@ class SignUpService {
             storageRef.putData(imageJPEG, metadata: nil, completion: { (_, error) in
                 guard error == nil else {
                     print("error upload image")
+                    OnError(error?.localizedDescription ?? "")
                     onSuccess(false)
                     return
                 }
@@ -35,6 +36,7 @@ class SignUpService {
                 storageRef.downloadURL(completion: { (url, error) in
                     guard let urlImage = url?.absoluteString, error == nil else {
                         print("error upload data in storage")
+                        OnError(error?.localizedDescription ?? "")
                         onSuccess(false)
                         return
                     }

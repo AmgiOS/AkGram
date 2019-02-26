@@ -24,18 +24,24 @@ class SignInViewController: UIViewController {
         handleTextField()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        checkStatusUser()
+    }
+    
     //MARK: - @IBAction
     @IBAction func signInButton(_ sender: Any) {
         guard let email = emailTextfield.text, let password = passwordTextfield.text else { return }
-        signInService.signIn(email, password) { (success) in
+        LoadingScreen()
+        signInService.signIn(email, password, onSuccess: { (success) in
             if success {
+                self.successScreen()
                 self.performSegue(withIdentifier: "signInToTabBar", sender: nil)
-            } else {
-                print("error identification")
             }
+        }) { error in
+            self.errorScreen(error ?? "")
         }
     }
-    
 }
 
 extension SignInViewController {
@@ -53,5 +59,20 @@ extension SignInViewController {
         }
         signInButton.setTitleColor(UIColor.white, for: .normal)
         signInButton.isEnabled = true
+    }
+    
+    private func checkStatusUser() {
+        signInService.checkIfUserIsAlreadyOnline { (success) in
+            if success {
+                self.performSegue(withIdentifier: "signInToTabBar", sender: nil)
+            }
+        }
+    }
+}
+
+extension SignInViewController {
+    //MARK: - Functions
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 }

@@ -13,7 +13,7 @@
         <!--Sign In View Controller-->
         <scene sceneID="zBW-7e-d0K">
             <objects>
-                <viewController id="9pF-At-NST" customClass="SignInViewController" customModule="AkGram" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInViewController" id="9pF-At-NST" customClass="SignInViewController" customModule="AkGram" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kDi-fl-zbd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -163,7 +163,7 @@
                                     <action selector="dissmissView:" destination="zKd-Nf-brf" eventType="touchUpInside" id="pA6-aA-hax"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderImg" translatesAutoresizingMaskIntoConstraints="NO" id="luv-VH-J8P">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderImg" translatesAutoresizingMaskIntoConstraints="NO" id="luv-VH-J8P">
                                 <rect key="frame" x="130" y="50" width="115" height="116"/>
                             </imageView>
                         </subviews>

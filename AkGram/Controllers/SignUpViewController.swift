@@ -34,14 +34,15 @@ class SignUpViewController: UIViewController {
     @IBAction func signUpbutton(_ sender: Any) {
         guard let username = usernameTextField.text, let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
-//        check password count < 6 elements
         let imageJPEG = UIImage.jpegData(selectedImage)(compressionQuality: 0.1)
-        signUpService.signUp(username, email, password, imageJPEG ?? Data()) { (success) in
+        LoadingScreen()
+        signUpService.signUp(username, email, password, imageJPEG ?? Data(), onSuccess: { (success) in
             if success {
+                self.successScreen()
                 self.performSegue(withIdentifier: "signInToTabBar", sender: nil)
-            } else {
-                print("error to sign up")
             }
+        }) { (error) in
+            self.errorScreen(error ?? "")
         }
     }
 }
@@ -56,6 +57,7 @@ extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationCon
     }
     
     private func ProfilePhoto() {
+        imagePicker.delegate = self
         pictureImageView.isUserInteractionEnabled = true
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGesturePicture))
         pictureImageView.addGestureRecognizer(gestureRecognizer)
@@ -75,7 +77,6 @@ extension SignUpViewController {
         setUpTextField(passwordTextField)
         ProfilePhoto()
         handleTextField()
-        imagePicker.delegate = self
     }
     
     private func handleTextField() {
@@ -92,5 +93,9 @@ extension SignUpViewController {
         }
         signUpButton.setTitleColor(UIColor.white, for: .normal)
         signUpButton.isEnabled = true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 }

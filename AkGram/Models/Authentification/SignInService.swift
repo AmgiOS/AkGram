@@ -12,14 +12,23 @@ import FirebaseAuth
 class SignInService {
     
     //MARK: Functions
-    func signIn(_ email: String, _ password: String, onSuccess: @escaping (Bool) -> Void) {
+    func signIn(_ email: String, _ password: String, onSuccess: @escaping (Bool) -> Void, OnError: @escaping (String?) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             guard let user = user, user.user.email != nil , error == nil else {
-                print(error?.localizedDescription ?? "error to sign in")
+                print(error?.localizedDescription ?? "")
+                OnError(error?.localizedDescription ?? "")
                 onSuccess(false)
                 return
             }
             onSuccess(true)
         }
+    }
+    
+    func checkIfUserIsAlreadyOnline(completion: @escaping (Bool) -> Void) {
+        guard Auth.auth().currentUser != nil else {
+            completion(false)
+            return
+        }
+        completion(true)
     }
 }
