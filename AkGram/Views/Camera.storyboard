@@ -27,6 +27,7 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ckL-N4-mKW">
                                         <rect key="frame" x="130" y="15" width="240" height="93"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
@@ -70,10 +71,18 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uoH-MG-JVM"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Camera" id="cJE-M1-VsF"/>
+                    <navigationItem key="navigationItem" title="Camera" id="cJE-M1-VsF">
+                        <barButtonItem key="leftBarButtonItem" title="Remove" id="RR0-KB-HFl">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="removeButton:" destination="rIV-st-ycb" id="obD-Lc-24x"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="captionTextView" destination="ckL-N4-mKW" id="4vt-q3-RRb"/>
                         <outlet property="photoImageView" destination="1kn-XZ-6NS" id="rt9-b0-vN4"/>
+                        <outlet property="removeButton" destination="RR0-KB-HFl" id="j9l-H1-zoV"/>
                         <outlet property="shareButton" destination="XWV-1S-chb" id="Z5T-Hb-eqP"/>
                     </connections>
                 </viewController>

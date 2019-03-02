@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		7511A2AC0205E45741D26946 /* Pods_AkGramTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 407DB9662725A4D1D4E43FAA /* Pods_AkGramTests.framework */; };
+		99327D6122296C6400E74B22 /* Constante.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99327D6022296C6400E74B22 /* Constante.swift */; };
+		99327D632229853A00E74B22 /* LoadPostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99327D622229853A00E74B22 /* LoadPostService.swift */; };
+		99327D652229932B00E74B22 /* StructPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99327D642229932B00E74B22 /* StructPost.swift */; };
+		99327D692229F5D100E74B22 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99327D682229F5D100E74B22 /* HomeTableViewCell.swift */; };
 		997B7CFF22231C30003E3A30 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997B7CFE22231C30003E3A30 /* SignUpService.swift */; };
 		997B7D01222364C7003E3A30 /* SignInService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997B7D00222364C7003E3A30 /* SignInService.swift */; };
 		99A35840222044BF00FC4BC5 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A3583F222044BF00FC4BC5 /* Extension.swift */; };
@@ -51,6 +55,10 @@
 		644BCE533ABB2559B1ED5C8C /* Pods-AkGramTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AkGramTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AkGramTests/Pods-AkGramTests.debug.xcconfig"; sourceTree = "<group>"; };
 		660B4B811CD086ADD97D18F1 /* Pods-AkGram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AkGram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AkGram/Pods-AkGram.debug.xcconfig"; sourceTree = "<group>"; };
 		735449089C87320EC91B0F30 /* Pods-AkGramTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AkGramTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AkGramTests/Pods-AkGramTests.release.xcconfig"; sourceTree = "<group>"; };
+		99327D6022296C6400E74B22 /* Constante.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constante.swift; sourceTree = "<group>"; };
+		99327D622229853A00E74B22 /* LoadPostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadPostService.swift; sourceTree = "<group>"; };
+		99327D642229932B00E74B22 /* StructPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructPost.swift; sourceTree = "<group>"; };
+		99327D682229F5D100E74B22 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		997B7CFE22231C30003E3A30 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
 		997B7D00222364C7003E3A30 /* SignInService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInService.swift; sourceTree = "<group>"; };
 		99A3583F222044BF00FC4BC5 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -122,10 +130,29 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		99327D66222993A700E74B22 /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+				99327D622229853A00E74B22 /* LoadPostService.swift */,
+				99327D642229932B00E74B22 /* StructPost.swift */,
+				99DF9A832224BB9700FE300F /* ShareService.swift */,
+			);
+			path = Posts;
+			sourceTree = "<group>";
+		};
+		99327D672229F59400E74B22 /* CustomTableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				99327D682229F5D100E74B22 /* HomeTableViewCell.swift */,
+			);
+			path = CustomTableViewCells;
+			sourceTree = "<group>";
+		};
 		99A3583E222044A300FC4BC5 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				99A3583F222044BF00FC4BC5 /* Extension.swift */,
+				99327D6022296C6400E74B22 /* Constante.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -198,6 +225,7 @@
 		99FC3A7B221B0FF3009F053B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				99327D672229F59400E74B22 /* CustomTableViewCells */,
 				99FC3A74221B0201009F053B /* Start.storyboard */,
 				99FC3A7E221B7632009F053B /* Main.storyboard */,
 				99FC3A80221B77BC009F053B /* Home.storyboard */,
@@ -225,7 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				99DF9A822224BA7D00FE300F /* Authentification */,
-				99DF9A832224BB9700FE300F /* ShareService.swift */,
+				99327D66222993A700E74B22 /* Posts */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -346,6 +374,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-AkGram/Pods-AkGram-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CodableFirebase/CodableFirebase.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
@@ -356,6 +385,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CodableFirebase.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
@@ -420,16 +450,20 @@
 			files = (
 				997B7D01222364C7003E3A30 /* SignInService.swift in Sources */,
 				99A35840222044BF00FC4BC5 /* Extension.swift in Sources */,
+				99327D632229853A00E74B22 /* LoadPostService.swift in Sources */,
 				997B7CFF22231C30003E3A30 /* SignUpService.swift in Sources */,
 				99FC3A79221B0CE5009F053B /* SignUpViewController.swift in Sources */,
 				99FC3A77221B0530009F053B /* SignInViewController.swift in Sources */,
+				99327D652229932B00E74B22 /* StructPost.swift in Sources */,
 				99FC3A55221B012D009F053B /* AppDelegate.swift in Sources */,
 				99FC3A83221B77F3009F053B /* HomeViewController.swift in Sources */,
 				99FC3A91221B7C04009F053B /* ActivityViewController.swift in Sources */,
 				99DF9A842224BB9700FE300F /* ShareService.swift in Sources */,
 				99FC3A8D221B7BDF009F053B /* DiscoverViewController.swift in Sources */,
 				99F1C17F22243B79004E36FA /* LogOutService.swift in Sources */,
+				99327D6122296C6400E74B22 /* Constante.swift in Sources */,
 				99FC3A93221B7C11009F053B /* ProfileViewController.swift in Sources */,
+				99327D692229F5D100E74B22 /* HomeTableViewCell.swift in Sources */,
 				99FC3A8F221B7BEC009F053B /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

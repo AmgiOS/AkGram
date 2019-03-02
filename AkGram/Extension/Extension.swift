@@ -25,7 +25,7 @@ extension UIViewController {
     }
     
     //MARK: - JGProgressHUD
-    func LoadingScreen() {
+    func LaunchScreen() {
         let hud = JGProgressHUD(style: .dark)
         hud.tintColor = UIColor.white
         hud.textLabel.text = "Loading ..."
@@ -47,7 +47,7 @@ extension UIViewController {
         hud.indicatorView = JGProgressHUDSuccessIndicatorView(contentView: self.view)
         hud.tintColor = UIColor.green
         hud.textLabel.text = "Success"
-        hud.show(in: self.view, animated: true)
+        hud.show(in: self.view)
         hud.dismiss(afterDelay: 1.0)
     }
     
@@ -57,5 +57,20 @@ extension UIViewController {
         hud.textLabel.text = "Connected"
         hud.show(in: self.view, animated: true)
         hud.dismiss(afterDelay: 1.0)
+    }
+    
+    func LoadingScreen() {
+        let hud = JGProgressHUD(style: .dark)
+        hud.tintColor = UIColor.white
+        hud.textLabel.text = "Loading ..."
+        hud.show(in: self.view)
+        hud.dismiss(afterDelay: 3.0)
+    }
+    
+    //MARK: - Alerts
+    func alert(title: String, message: String, action: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: action, style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }

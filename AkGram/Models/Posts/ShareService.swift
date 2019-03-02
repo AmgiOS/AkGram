@@ -14,13 +14,11 @@ import FirebaseStorage
 class ShareService {
     private init() {}
     static let shared = ShareService()
-    //MARK: - Vars
-    let idStorage = "gs://akgram-31c3b.appspot.com"
     
     //MARK: - Functions
     func sharePost(_ description: String, _ photoUrl: Data, onSuccess: @escaping (Bool) -> Void, OnError: @escaping (String?) -> Void) {
         let photoIDString = NSUUID().uuidString
-        let storageRef = Storage.storage().reference(forURL: self.idStorage).child("posts").child(photoIDString)
+        let storageRef = Storage.storage().reference(forURL: idStorage).child("posts").child(photoIDString)
         storageRef.putData(photoUrl, metadata: nil, completion: { (_, error) in
             guard error == nil else {
                 print("error upload image")

@@ -10,13 +10,23 @@ import UIKit
 
 class HomeViewController: UIViewController {
     //MARK: - Vars
-
+    var postService = LoadPostService()
+    var postCount = [Post]()
+    var postData: Post?
+    
     //MARK: - @IBOutlet
+    @IBOutlet weak var postsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        LoadingScreen()
+        LaunchScreen()
         connectedScreen()
+        setUp()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadData()
     }
     
     //MARK: - @IBAction
@@ -26,5 +36,38 @@ class HomeViewController: UIViewController {
         let signInVC = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
         self.present(signInVC, animated: true, completion: nil)
     }
+}
+
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    //MARK: - TableView
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return postCount.count
+    }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as? HomeTableViewCell else {
+            return UITableViewCell()
+        }
+        cell.post = postCount[indexPath.row]
+        return cell
+    }
+}
+
+extension HomeViewController {
+    //MARK: - Functions
+    private func setUp() {
+        postsTableView.delegate = self
+        postsTableView.dataSource = self
+        
+    }
+    
+    private func reloadData() {
+        postService.reloadPosts { (success, posts) in
+            if success, let post = posts {
+                self.postData = post
+                print(self.postCount.count)
+                self.postsTableView.reloadData()
+            }
+        }
+    }
 }
