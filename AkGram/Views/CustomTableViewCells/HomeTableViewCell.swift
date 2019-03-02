@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class HomeTableViewCell: UITableViewCell {
     
@@ -23,21 +24,37 @@ class HomeTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        nameLabel.text = ""
+        captionLabel.text = "Added comment ..."
     }
 
     //MARK: - Vars
+    var postService = LoadPostService()
+    
     var post: Post? {
         didSet {
             guard let post = post else { return }
             captionLabel.text = post.descriptionPhoto
+            
+            let image = URL(string: post.photoURL)
+            postImageView.sd_setImage(with: image, completed: nil)
+            
+            loadUserInfo(post.uid)
         }
     }
+}
+
+extension HomeTableViewCell {
     
+    //MARK: - Functions
+    private func loadUserInfo(_ currentUser: String) {
+        postService.setUpUserInfo(currentUser) { (success, user) in
+            if success, let user = user {
+                self.nameLabel.text = user.username
+                
+                let image = URL(string: user.profileImage)
+                self.profileImageview.sd_setImage(with: image, placeholderImage: UIImage(named: "placeholderImg"), options: .continueInBackground, progress: nil, completed: nil)
+            }
+        }
+    }
 }

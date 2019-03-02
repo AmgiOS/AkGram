@@ -38,6 +38,7 @@ class CameraViewController: UIViewController {
         LoadingScreen()
         ShareService.shared.sharePost(text, imageJPEG, onSuccess: { (success) in
             if success {
+                self.dismissLoadingScreen()
                 self.successScreen()
                 self.allResetAfterPost()
             }

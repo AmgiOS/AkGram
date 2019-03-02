@@ -45,7 +45,9 @@ class ShareService {
         let newUserReference = Database.database().reference().child("posts")
         guard let newPostsID = newUserReference.childByAutoId().key else { return }
         let newPostReference = newUserReference.child(newPostsID)
-        newPostReference.setValue(["photoURL" : photoUrl, "descriptionPhoto": description]) { (error, reference) in
+        guard let currentUser = Auth.auth().currentUser else { return }
+        let currentUserId = currentUser.uid
+        newPostReference.setValue(["uid": currentUserId ,"photoURL" : photoUrl, "descriptionPhoto": description]) { (error, reference) in
             guard error == nil else {
                 print("error upload image and Description")
                 return

@@ -69,11 +69,39 @@ PODS:
   - GTMSessionFetcher/Core (1.2.0)
   - JGProgressHUD (2.0.3)
   - leveldb-library (1.20)
+  - libwebp (0.6.1):
+    - libwebp/core (= 0.6.1)
+    - libwebp/dec (= 0.6.1)
+    - libwebp/demux (= 0.6.1)
+    - libwebp/dsp (= 0.6.1)
+    - libwebp/enc (= 0.6.1)
+    - libwebp/mux (= 0.6.1)
+    - libwebp/utils (= 0.6.1)
+    - libwebp/webp (= 0.6.1)
+  - libwebp/core (0.6.1):
+    - libwebp/webp
+  - libwebp/dec (0.6.1):
+    - libwebp/core
+  - libwebp/demux (0.6.1):
+    - libwebp/core
+  - libwebp/dsp (0.6.1):
+    - libwebp/core
+  - libwebp/enc (0.6.1):
+    - libwebp/core
+  - libwebp/mux (0.6.1):
+    - libwebp/core
+  - libwebp/utils (0.6.1):
+    - libwebp/core
+  - libwebp/webp (0.6.1)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - SDWebImage/Core (4.4.2)
+  - SDWebImage/WebP (4.4.2):
+    - libwebp (~> 0.5)
+    - SDWebImage/Core
 
 DEPENDENCIES:
   - CodableFirebase
@@ -82,6 +110,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - JGProgressHUD
+  - SDWebImage/WebP
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -99,7 +128,9 @@ SPEC REPOS:
     - GTMSessionFetcher
     - JGProgressHUD
     - leveldb-library
+    - libwebp
     - nanopb
+    - SDWebImage
 
 SPEC CHECKSUMS:
   CodableFirebase: 0bf201991eeec35eb9fcd987d271ea463cf34a80
@@ -116,8 +147,10 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
   JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  libwebp: 0f01098c6c17175391af621b2f14150f3ca16e16
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
 
-PODFILE CHECKSUM: f70706a9089010a91aa55cfb3771d4b6e587c55a
+PODFILE CHECKSUM: a4fe143d94d8ae73beebd5406107a85186236aeb
 
 COCOAPODS: 1.5.3

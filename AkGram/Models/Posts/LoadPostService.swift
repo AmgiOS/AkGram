@@ -16,16 +16,31 @@ class LoadPostService {
     //MARK: - Functions
     func reloadPosts(completionHandler: @escaping (Bool, Post?) -> Void) {
         Database.database().reference().child("posts").observe(.childAdded, with: { (snapshot) in
-            guard let value = snapshot.value else { return}
-            do {
-                let data = try FirebaseDecoder().decode(Post.self, from: value)
-                completionHandler(true, data)
-            } catch {
-                print("error decode data")
-                completionHandler(false, nil)
+            DispatchQueue.main.async {
+                guard let value = snapshot.value else { return}
+                do {
+                    let data = try FirebaseDecoder().decode(Post.self, from: value)
+                    completionHandler(true, data)
+                } catch {
+                    print("error decode data")
+                    completionHandler(false, nil)
+                }
             }
-        }) { (error) in
-            print(error.localizedDescription)
+        })
+    }
+    
+    func setUpUserInfo(_ currentUser: String, completionHandler: @escaping (Bool, User?) -> Void) {
+        Database.database().reference().child("users").child(currentUser).observeSingleEvent(of: .value) { (snapshot) in
+            DispatchQueue.main.async {
+                guard let value = snapshot.value else { return}
+                do {
+                    let data = try FirebaseDecoder().decode(User.self, from: value)
+                    completionHandler(true, data)
+                } catch {
+                    print("error decode data")
+                    completionHandler(false, nil)
+                }
+            }
         }
     }
 }

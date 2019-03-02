@@ -36,8 +36,10 @@ class SignUpViewController: UIViewController {
         guard let password = passwordTextField.text else { return }
         let imageJPEG = UIImage.jpegData(selectedImage)(compressionQuality: 0.1)
         LoadingScreen()
+        
         signUpService.signUp(username, email, password, imageJPEG ?? Data(), onSuccess: { (success) in
             if success {
+                self.dismissLoadingScreen()
                 self.successScreen()
                 self.performSegue(withIdentifier: "signInToTabBar", sender: nil)
             }

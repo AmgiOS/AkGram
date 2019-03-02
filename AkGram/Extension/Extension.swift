@@ -25,6 +25,8 @@ extension UIViewController {
     }
     
     //MARK: - JGProgressHUD
+    static let hud = JGProgressHUD(style: .dark)
+    
     func LaunchScreen() {
         let hud = JGProgressHUD(style: .dark)
         hud.tintColor = UIColor.white
@@ -60,17 +62,12 @@ extension UIViewController {
     }
     
     func LoadingScreen() {
-        let hud = JGProgressHUD(style: .dark)
-        hud.tintColor = UIColor.white
-        hud.textLabel.text = "Loading ..."
-        hud.show(in: self.view)
-        hud.dismiss(afterDelay: 3.0)
+        UIViewController.hud.tintColor = UIColor.white
+        UIViewController.hud.textLabel.text = "Loading ..."
+        UIViewController.hud.show(in: self.view)
     }
     
-    //MARK: - Alerts
-    func alert(title: String, message: String, action: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: action, style: .cancel, handler: nil))
-        present(alert, animated: true, completion: nil)
+    func dismissLoadingScreen() {
+        UIViewController.hud.dismiss(afterDelay: 1.0)
     }
 }

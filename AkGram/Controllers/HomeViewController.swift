@@ -11,22 +11,22 @@ import UIKit
 class HomeViewController: UIViewController {
     //MARK: - Vars
     var postService = LoadPostService()
-    var postCount = [Post]()
-    var postData: Post?
+    var postData = [Post]()
     
     //MARK: - @IBOutlet
     @IBOutlet weak var postsTableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        LaunchScreen()
         connectedScreen()
         setUp()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        reloadData()
+        self.tabBarController?.tabBar.isHidden = false
+        loadData()
     }
     
     //MARK: - @IBAction
@@ -41,14 +41,17 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     //MARK: - TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return postCount.count
+        return postData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as? HomeTableViewCell else {
             return UITableViewCell()
         }
-        cell.post = postCount[indexPath.row]
+        
+        let post = postData[indexPath.row]
+        cell.post = post
+        
         return cell
     }
 }
@@ -61,13 +64,27 @@ extension HomeViewController {
         
     }
     
-    private func reloadData() {
+    private func loadData() {
+        activityIndicator.isHidden = false
         postService.reloadPosts { (success, posts) in
             if success, let post = posts {
-                self.postData = post
-                print(self.postCount.count)
+                self.activityIndicator.isHidden = true
+                self.checkIfElementExist(post)
                 self.postsTableView.reloadData()
             }
+        }
+    }
+    
+    private func checkIfElementExist(_ post: Post) {
+        let contain = postData.contains(where: { (element) -> Bool in
+            var value = false
+            if element.photoURL == post.photoURL {
+                value = true
+            }
+            return value
+        })
+        if !contain {
+            postData.append(post)
         }
     }
 }
