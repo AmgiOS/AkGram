@@ -26,10 +26,13 @@ class HomeTableViewCell: UITableViewCell {
         super.awakeFromNib()
         nameLabel.text = ""
         captionLabel.text = "Added comment ..."
+        tapGestureComment()
+        GestureLike()
     }
 
     //MARK: - Vars
     var postService = LoadPostService()
+    var homeVC: HomeViewController?
     
     var post: Post? {
         didSet {
@@ -40,6 +43,8 @@ class HomeTableViewCell: UITableViewCell {
             postImageView.sd_setImage(with: image, completed: nil)
             
             loadUserInfo(post.uid)
+            getLikesInDatabase(post)
+            reloadLikes()
         }
     }
 }
@@ -57,4 +62,52 @@ extension HomeTableViewCell {
             }
         }
     }
+    
+    private func getLikesInDatabase(_ post: Post) {
+        let isLiked = post.likes?[uidAccountUser] ?? false
+        let imageName = post.likes == nil || !isLiked ? "like" : "likeSelected"
+        likeImageView.image = UIImage(named: imageName)
+        if let likeCount = post.likeCount, likeCount != 0 {
+            likeCountButton.setTitle("\(likeCount) likes", for: .normal)
+        } else {
+            likeCountButton.setTitle("Be the First like", for: .normal)
+        }
+    }
+    
+    private func reloadLikes() {
+        guard let posts = post else { return }
+        LikesService.shared.reloadLikesPosts(posts.idPost) { (likeCount) in
+            self.likeCountButton.setTitle("\(likeCount) likes", for: .normal)
+        }
+    }
 }
+
+extension HomeTableViewCell {
+    //MARK: - TapGestureRecognizerComment
+    private func tapGestureComment( ) {
+        commentImageView.isUserInteractionEnabled = true
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGesture))
+        commentImageView.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    @objc func tapGesture() {
+        homeVC?.performSegue(withIdentifier: "commentSegue", sender: post?.idPost)
+    }
+    
+    //MARK: - TapGestureRecognizerLike
+    private func GestureLike( ) {
+        likeImageView.isUserInteractionEnabled = true
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGestureLike))
+        likeImageView.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    @objc func tapGestureLike() {
+        guard let postIndex = post else { return }
+        LikesService.shared.downloadLikesInPosts(postIndex.idPost) { (success, posts)  in
+            if success, let post = posts {
+                self.getLikesInDatabase(post)
+            }
+        }
+    }
+}
+

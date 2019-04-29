@@ -21,7 +21,7 @@ class SignUpService {
                 onSuccess(false)
                 return
             }
-            print(1)
+            
             let storageRef = Storage.storage().reference(forURL: idStorage).child("profile_image").child(user)
             storageRef.putData(imageJPEG, metadata: nil, completion: { (_, error) in
                 guard error == nil else {
@@ -30,7 +30,7 @@ class SignUpService {
                     onSuccess(false)
                     return
                 }
-                print(2)
+                
                 storageRef.downloadURL(completion: { (url, error) in
                     guard let urlImage = url?.absoluteString, error == nil else {
                         print("error upload data in storage")
@@ -38,7 +38,7 @@ class SignUpService {
                         onSuccess(false)
                         return
                     }
-                    print(3)
+                    
                     self.uploadDataInStorage(user: user, username, email, urlImage)
                     onSuccess(true)
                 })

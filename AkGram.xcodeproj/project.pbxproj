@@ -10,7 +10,7 @@
 		7511A2AC0205E45741D26946 /* Pods_AkGramTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 407DB9662725A4D1D4E43FAA /* Pods_AkGramTests.framework */; };
 		99327D6122296C6400E74B22 /* Constante.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99327D6022296C6400E74B22 /* Constante.swift */; };
 		99327D632229853A00E74B22 /* LoadPostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99327D622229853A00E74B22 /* LoadPostService.swift */; };
-		99327D652229932B00E74B22 /* StructPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99327D642229932B00E74B22 /* StructPost.swift */; };
+		99327D652229932B00E74B22 /* PostJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99327D642229932B00E74B22 /* PostJSON.swift */; };
 		99327D692229F5D100E74B22 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99327D682229F5D100E74B22 /* HomeTableViewCell.swift */; };
 		995CF6A4222B484900F8EBB9 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995CF6A3222B484900F8EBB9 /* CommentViewController.swift */; };
 		995CF6A6222B486F00F8EBB9 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995CF6A5222B486F00F8EBB9 /* CommentTableViewCell.swift */; };
@@ -18,7 +18,10 @@
 		997B7D01222364C7003E3A30 /* SignInService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997B7D00222364C7003E3A30 /* SignInService.swift */; };
 		99A35840222044BF00FC4BC5 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A3583F222044BF00FC4BC5 /* Extension.swift */; };
 		99A3584222204B4900FC4BC5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 99A3584122204B4900FC4BC5 /* GoogleService-Info.plist */; };
+		99C96726227746BF00DFB9A9 /* HeaderProfileCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C96725227746BF00DFB9A9 /* HeaderProfileCollectionReusableView.swift */; };
+		99D6D3ED222D6A41004C6587 /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D6D3EC222D6A41004C6587 /* CommentService.swift */; };
 		99DF9A842224BB9700FE300F /* ShareService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DF9A832224BB9700FE300F /* ShareService.swift */; };
+		99EA1FB3222ED41400C4CBB3 /* LikesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EA1FB2222ED41400C4CBB3 /* LikesService.swift */; };
 		99F1C17F22243B79004E36FA /* LogOutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1C17E22243B79004E36FA /* LogOutService.swift */; };
 		99FC3A55221B012D009F053B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FC3A54221B012D009F053B /* AppDelegate.swift */; };
 		99FC3A5C221B012E009F053B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99FC3A5B221B012E009F053B /* Assets.xcassets */; };
@@ -59,7 +62,7 @@
 		735449089C87320EC91B0F30 /* Pods-AkGramTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AkGramTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AkGramTests/Pods-AkGramTests.release.xcconfig"; sourceTree = "<group>"; };
 		99327D6022296C6400E74B22 /* Constante.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constante.swift; sourceTree = "<group>"; };
 		99327D622229853A00E74B22 /* LoadPostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadPostService.swift; sourceTree = "<group>"; };
-		99327D642229932B00E74B22 /* StructPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructPost.swift; sourceTree = "<group>"; };
+		99327D642229932B00E74B22 /* PostJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostJSON.swift; sourceTree = "<group>"; };
 		99327D682229F5D100E74B22 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		995CF6A3222B484900F8EBB9 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		995CF6A5222B486F00F8EBB9 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
@@ -68,7 +71,10 @@
 		99A3583F222044BF00FC4BC5 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		99A3584122204B4900FC4BC5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		99B5BD6F812FE0AC393D0603 /* Pods-AkGram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AkGram.release.xcconfig"; path = "Pods/Target Support Files/Pods-AkGram/Pods-AkGram.release.xcconfig"; sourceTree = "<group>"; };
+		99C96725227746BF00DFB9A9 /* HeaderProfileCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderProfileCollectionReusableView.swift; sourceTree = "<group>"; };
+		99D6D3EC222D6A41004C6587 /* CommentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
 		99DF9A832224BB9700FE300F /* ShareService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareService.swift; sourceTree = "<group>"; };
+		99EA1FB2222ED41400C4CBB3 /* LikesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesService.swift; sourceTree = "<group>"; };
 		99F1C17E22243B79004E36FA /* LogOutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutService.swift; sourceTree = "<group>"; };
 		99FC3A51221B012D009F053B /* AkGram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AkGram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99FC3A54221B012D009F053B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -138,8 +144,10 @@
 			isa = PBXGroup;
 			children = (
 				99327D622229853A00E74B22 /* LoadPostService.swift */,
-				99327D642229932B00E74B22 /* StructPost.swift */,
 				99DF9A832224BB9700FE300F /* ShareService.swift */,
+				99327D642229932B00E74B22 /* PostJSON.swift */,
+				99D6D3EB222D6A14004C6587 /* Comment */,
+				99EA1FB1222ED3F700C4CBB3 /* Likes */,
 			);
 			path = Posts;
 			sourceTree = "<group>";
@@ -162,6 +170,22 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		99C96727227746C800DFB9A9 /* CustomCollectionReusableView */ = {
+			isa = PBXGroup;
+			children = (
+				99C96725227746BF00DFB9A9 /* HeaderProfileCollectionReusableView.swift */,
+			);
+			path = CustomCollectionReusableView;
+			sourceTree = "<group>";
+		};
+		99D6D3EB222D6A14004C6587 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				99D6D3EC222D6A41004C6587 /* CommentService.swift */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
 		99DF9A822224BA7D00FE300F /* Authentification */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +194,14 @@
 				99F1C17E22243B79004E36FA /* LogOutService.swift */,
 			);
 			path = Authentification;
+			sourceTree = "<group>";
+		};
+		99EA1FB1222ED3F700C4CBB3 /* Likes */ = {
+			isa = PBXGroup;
+			children = (
+				99EA1FB2222ED41400C4CBB3 /* LikesService.swift */,
+			);
+			path = Likes;
 			sourceTree = "<group>";
 		};
 		99FC3A48221B012D009F053B = {
@@ -231,6 +263,7 @@
 		99FC3A7B221B0FF3009F053B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				99C96727227746C800DFB9A9 /* CustomCollectionReusableView */,
 				99327D672229F59400E74B22 /* CustomTableViewCells */,
 				99FC3A74221B0201009F053B /* Start.storyboard */,
 				99FC3A7E221B7632009F053B /* Main.storyboard */,
@@ -317,9 +350,11 @@
 				TargetAttributes = {
 					99FC3A50221B012D009F053B = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 					99FC3A64221B012E009F053B = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = 99FC3A50221B012D009F053B;
 					};
 				};
@@ -460,11 +495,14 @@
 			files = (
 				997B7D01222364C7003E3A30 /* SignInService.swift in Sources */,
 				99A35840222044BF00FC4BC5 /* Extension.swift in Sources */,
+				99C96726227746BF00DFB9A9 /* HeaderProfileCollectionReusableView.swift in Sources */,
 				99327D632229853A00E74B22 /* LoadPostService.swift in Sources */,
+				99D6D3ED222D6A41004C6587 /* CommentService.swift in Sources */,
 				997B7CFF22231C30003E3A30 /* SignUpService.swift in Sources */,
 				99FC3A79221B0CE5009F053B /* SignUpViewController.swift in Sources */,
+				99EA1FB3222ED41400C4CBB3 /* LikesService.swift in Sources */,
 				99FC3A77221B0530009F053B /* SignInViewController.swift in Sources */,
-				99327D652229932B00E74B22 /* StructPost.swift in Sources */,
+				99327D652229932B00E74B22 /* PostJSON.swift in Sources */,
 				99FC3A55221B012D009F053B /* AppDelegate.swift in Sources */,
 				995CF6A4222B484900F8EBB9 /* CommentViewController.swift in Sources */,
 				99FC3A83221B77F3009F053B /* HomeViewController.swift in Sources */,
@@ -642,7 +680,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = fr.amgindustries.AkGram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -663,7 +701,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = fr.amgindustries.AkGram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -684,7 +722,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fr.amgindustries.AkGramTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AkGram.app/AkGram";
 			};
@@ -706,7 +744,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fr.amgindustries.AkGramTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AkGram.app/AkGram";
 			};

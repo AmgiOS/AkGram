@@ -8,10 +8,14 @@
 
 import Foundation
 
+//MARK: - SetUp UserInfo
 struct Post: Decodable {
     let descriptionPhoto: String
     let photoURL: String
     let uid: String
+    let idPost: String
+    let likeCount: Int?
+    let likes: [String: Bool]?
 }
 
 struct User: Decodable {
@@ -19,3 +23,9 @@ struct User: Decodable {
     let profileImage: String
     let username: String
 }
+
+//MARK: SetUp Id Post-Comment
+struct Comment: Decodable {
+    let commentText, uid: String
+}
+

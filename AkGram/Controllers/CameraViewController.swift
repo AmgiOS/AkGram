@@ -39,7 +39,6 @@ class CameraViewController: UIViewController {
         ShareService.shared.sharePost(text, imageJPEG, onSuccess: { (success) in
             if success {
                 self.dismissLoadingScreen()
-                self.successScreen()
                 self.allResetAfterPost()
             }
         }) { (error) in
@@ -83,6 +82,7 @@ extension CameraViewController {
         photoImageView.image = UIImage(named: "Placeholder-image")
         selectedImage = nil
         tabBarController?.selectedIndex = 0
+        successScreen()
     }
     
     private func handlePhoto() {

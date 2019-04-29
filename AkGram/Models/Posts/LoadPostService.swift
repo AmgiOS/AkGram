@@ -13,9 +13,10 @@ import CodableFirebase
 
 class LoadPostService {
     
-    //MARK: - Functions
+    //MARK: - Download Posts
+    //Get data in post in database
     func reloadPosts(completionHandler: @escaping (Bool, Post?) -> Void) {
-        Database.database().reference().child("posts").observe(.childAdded, with: { (snapshot) in
+        refDatabase.child("posts").observe(.childAdded, with: { (snapshot) in
             DispatchQueue.main.async {
                 guard let value = snapshot.value else { return}
                 do {
@@ -29,8 +30,9 @@ class LoadPostService {
         })
     }
     
+    //Get User info in each post
     func setUpUserInfo(_ currentUser: String, completionHandler: @escaping (Bool, User?) -> Void) {
-        Database.database().reference().child("users").child(currentUser).observeSingleEvent(of: .value) { (snapshot) in
+        refDatabase.child("users").child(currentUser).observeSingleEvent(of: .value) { (snapshot) in
             DispatchQueue.main.async {
                 guard let value = snapshot.value else { return}
                 do {

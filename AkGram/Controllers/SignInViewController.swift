@@ -32,7 +32,6 @@ class SignInViewController: UIViewController {
     //MARK: - @IBAction
     @IBAction func signInButton(_ sender: Any) {
         guard let email = emailTextfield.text, let password = passwordTextfield.text else { return }
-        LoadingScreen()
         
         signInService.signIn(email, password, onSuccess: { (success) in
             if success {

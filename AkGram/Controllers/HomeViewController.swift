@@ -25,7 +25,7 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = false
+        postData.removeAll()
         loadData()
     }
     
@@ -35,6 +35,13 @@ class HomeViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Start", bundle: nil)
         let signInVC = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
         self.present(signInVC, animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "commentSegue" {
+            guard let commentVC = segue.destination as? CommentViewController else { return }
+            commentVC.idPost = sender as? String ?? ""
+        }
     }
 }
 
@@ -51,6 +58,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         let post = postData[indexPath.row]
         cell.post = post
+        cell.homeVC = self
         
         return cell
     }
@@ -61,7 +69,6 @@ extension HomeViewController {
     private func setUp() {
         postsTableView.delegate = self
         postsTableView.dataSource = self
-        
     }
     
     private func loadData() {
@@ -84,7 +91,7 @@ extension HomeViewController {
             return value
         })
         if !contain {
-            postData.append(post)
+            postData.insert(post, at: 0)
         }
     }
 }

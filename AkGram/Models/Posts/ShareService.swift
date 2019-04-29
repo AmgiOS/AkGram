@@ -15,7 +15,8 @@ class ShareService {
     private init() {}
     static let shared = ShareService()
     
-    //MARK: - Functions
+    //MARK: - Upload Posts
+    //upload picture in database
     func sharePost(_ description: String, _ photoUrl: Data, onSuccess: @escaping (Bool) -> Void, OnError: @escaping (String?) -> Void) {
         let photoIDString = NSUUID().uuidString
         let storageRef = Storage.storage().reference(forURL: idStorage).child("posts").child(photoIDString)
@@ -26,7 +27,7 @@ class ShareService {
                 onSuccess(false)
                 return
             }
-            print(2)
+            
             storageRef.downloadURL(completion: { (url, error) in
                 guard let photoUrl = url?.absoluteString, error == nil else {
                     print("error upload data in storage")
@@ -34,20 +35,21 @@ class ShareService {
                     onSuccess(false)
                     return
                 }
-                print(3)
+                
                 self.uploadPostsInStorage(description, photoUrl)
                 onSuccess(true)
             })
         })
     }
     
+    //Create dictionnary in database with data uploaded
     private func uploadPostsInStorage(_ description: String, _ photoUrl: String) {
         let newUserReference = Database.database().reference().child("posts")
         guard let newPostsID = newUserReference.childByAutoId().key else { return }
         let newPostReference = newUserReference.child(newPostsID)
         guard let currentUser = Auth.auth().currentUser else { return }
         let currentUserId = currentUser.uid
-        newPostReference.setValue(["uid": currentUserId ,"photoURL" : photoUrl, "descriptionPhoto": description]) { (error, reference) in
+        newPostReference.setValue(["uid": currentUserId ,"photoURL" : photoUrl, "descriptionPhoto": description, "idPost": newPostsID]) { (error, reference) in
             guard error == nil else {
                 print("error upload image and Description")
                 return
