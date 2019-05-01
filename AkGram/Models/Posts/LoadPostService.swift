@@ -35,6 +35,7 @@ class LoadPostService {
         refDatabase.child("users").child(currentUser).observeSingleEvent(of: .value) { (snapshot) in
             DispatchQueue.main.async {
                 guard let value = snapshot.value else { return}
+                
                 do {
                     let data = try FirebaseDecoder().decode(User.self, from: value)
                     completionHandler(true, data)

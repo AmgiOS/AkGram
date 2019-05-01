@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SDWebImage
 
 class HeaderProfileCollectionReusableView: UICollectionReusableView {
     //MARK: - @IBOutlets
@@ -39,6 +38,9 @@ extension HeaderProfileCollectionReusableView {
     private func setUpInfoUser() {
         profileImageView.image = UIImage(named: "placeholderImg")
         nameProfileLabel.text = " "
-        
+        myPostCountLabel.text = "0"
+        followingCountLabel.text = "0"
+        followersCountLabel.text = "0"
     }
+    
 }

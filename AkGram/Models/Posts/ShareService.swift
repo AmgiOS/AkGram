@@ -46,6 +46,7 @@ class ShareService {
     private func uploadPostsInStorage(_ description: String, _ photoUrl: String) {
         let newUserReference = Database.database().reference().child("posts")
         guard let newPostsID = newUserReference.childByAutoId().key else { return }
+        newUidPostWhenShare = newPostsID
         let newPostReference = newUserReference.child(newPostsID)
         guard let currentUser = Auth.auth().currentUser else { return }
         let currentUserId = currentUser.uid

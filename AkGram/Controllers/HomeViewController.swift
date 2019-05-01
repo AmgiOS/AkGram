@@ -25,7 +25,6 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        postData.removeAll()
         loadData()
     }
     
@@ -72,26 +71,14 @@ extension HomeViewController {
     }
     
     private func loadData() {
+        self.postData.removeAll()
         activityIndicator.isHidden = false
         postService.reloadPosts { (success, posts) in
             if success, let post = posts {
                 self.activityIndicator.isHidden = true
-                self.checkIfElementExist(post)
+                self.postData.insert(post, at: 0)
                 self.postsTableView.reloadData()
             }
-        }
-    }
-    
-    private func checkIfElementExist(_ post: Post) {
-        let contain = postData.contains(where: { (element) -> Bool in
-            var value = false
-            if element.photoURL == post.photoURL {
-                value = true
-            }
-            return value
-        })
-        if !contain {
-            postData.insert(post, at: 0)
         }
     }
 }

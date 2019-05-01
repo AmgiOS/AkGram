@@ -12,14 +12,21 @@ class ProfileViewController: UIViewController {
     //MARK: - Vars
     var userProfile: User?
     var postService = LoadPostService()
+    var myPostsProfile = MyPosts()
+    var posts = [Post]()
     
     //MARK: - @IBOutlet
     @IBOutlet weak var collectionViewProfile: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionViewProfile.dataSource = self
+        setUp()
         loadUserInfo(uidAccountUser)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getPostsUser()
     }
     
     //MARK: - @IBAction
@@ -28,11 +35,14 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UICollectionViewDataSource {
     //MARK: - CollectionView
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return posts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionViewCell", for: indexPath) as? PhotoCollectionViewCell else { return UICollectionViewCell() }
+        
+        let post = posts[indexPath.row]
+        cell.posts = post
         
         return cell
     }
@@ -45,12 +55,43 @@ extension ProfileViewController: UICollectionViewDataSource {
     }
 }
 
+extension ProfileViewController: UICollectionViewDelegateFlowLayout {
+    //MARK: Collection View Flow Layout for Size Cells
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.size.width / 3 - 1, height: collectionView.frame.size.width / 3 - 1)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+}
+
 extension ProfileViewController {
     //MARK: - Functions
+    private func setUp() {
+        collectionViewProfile.dataSource = self
+        collectionViewProfile.delegate = self
+    }
+    
     private func loadUserInfo(_ currentUser: String) {
         postService.setUpUserInfo(currentUser) { (success, user) in
             if success, let user = user {
                 self.userProfile = user
+                self.title = user.username
+                self.collectionViewProfile.reloadData()
+            }
+        }
+    }
+    
+    private func getPostsUser() {
+        self.posts.removeAll()
+        myPostsProfile.fetchMyPosts { (success, posts) in
+            if success, let post = posts {
+                self.posts.append(post)
                 self.collectionViewProfile.reloadData()
             }
         }

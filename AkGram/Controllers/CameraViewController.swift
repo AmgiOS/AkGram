@@ -12,6 +12,7 @@ class CameraViewController: UIViewController {
     //MARK: - Vars
     var imagePicker = UIImagePickerController()
     var selectedImage: UIImage?
+    var myPosts = MyPosts()
 
     //MARK: - @IBOutlet
     @IBOutlet weak var photoImageView: UIImageView!
@@ -38,7 +39,9 @@ class CameraViewController: UIViewController {
         LoadingScreen()
         ShareService.shared.sharePost(text, imageJPEG, onSuccess: { (success) in
             if success {
+                self.myPosts.uploadRefMyPostsInDatabase()
                 self.dismissLoadingScreen()
+                self.successScreen()
                 self.allResetAfterPost()
             }
         }) { (error) in
@@ -82,7 +85,6 @@ extension CameraViewController {
         photoImageView.image = UIImage(named: "Placeholder-image")
         selectedImage = nil
         tabBarController?.selectedIndex = 0
-        successScreen()
     }
     
     private func handlePhoto() {

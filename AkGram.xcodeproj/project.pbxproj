@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		7511A2AC0205E45741D26946 /* Pods_AkGramTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 407DB9662725A4D1D4E43FAA /* Pods_AkGramTests.framework */; };
+		9923C3402279B6CB00089340 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9923C33F2279B6CB00089340 /* PhotoCollectionViewCell.swift */; };
+		9923C3422279CBBA00089340 /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9923C3412279CBBA00089340 /* PeopleViewController.swift */; };
+		9923C3442279CC6400089340 /* PeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9923C3432279CC6400089340 /* PeopleTableViewCell.swift */; };
+		9923C3472279D0CE00089340 /* PeopleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9923C3462279D0CE00089340 /* PeopleService.swift */; };
+		9923C3492279DD0C00089340 /* FollowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9923C3482279DD0C00089340 /* FollowService.swift */; };
 		99327D6122296C6400E74B22 /* Constante.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99327D6022296C6400E74B22 /* Constante.swift */; };
 		99327D632229853A00E74B22 /* LoadPostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99327D622229853A00E74B22 /* LoadPostService.swift */; };
 		99327D652229932B00E74B22 /* PostJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99327D642229932B00E74B22 /* PostJSON.swift */; };
@@ -19,6 +24,7 @@
 		99A35840222044BF00FC4BC5 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A3583F222044BF00FC4BC5 /* Extension.swift */; };
 		99A3584222204B4900FC4BC5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 99A3584122204B4900FC4BC5 /* GoogleService-Info.plist */; };
 		99C96726227746BF00DFB9A9 /* HeaderProfileCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C96725227746BF00DFB9A9 /* HeaderProfileCollectionReusableView.swift */; };
+		99C9672A22779C5200DFB9A9 /* MyPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C9672922779C5200DFB9A9 /* MyPosts.swift */; };
 		99D6D3ED222D6A41004C6587 /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D6D3EC222D6A41004C6587 /* CommentService.swift */; };
 		99DF9A842224BB9700FE300F /* ShareService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DF9A832224BB9700FE300F /* ShareService.swift */; };
 		99EA1FB3222ED41400C4CBB3 /* LikesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EA1FB2222ED41400C4CBB3 /* LikesService.swift */; };
@@ -60,6 +66,11 @@
 		644BCE533ABB2559B1ED5C8C /* Pods-AkGramTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AkGramTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AkGramTests/Pods-AkGramTests.debug.xcconfig"; sourceTree = "<group>"; };
 		660B4B811CD086ADD97D18F1 /* Pods-AkGram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AkGram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AkGram/Pods-AkGram.debug.xcconfig"; sourceTree = "<group>"; };
 		735449089C87320EC91B0F30 /* Pods-AkGramTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AkGramTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AkGramTests/Pods-AkGramTests.release.xcconfig"; sourceTree = "<group>"; };
+		9923C33F2279B6CB00089340 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		9923C3412279CBBA00089340 /* PeopleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleViewController.swift; sourceTree = "<group>"; };
+		9923C3432279CC6400089340 /* PeopleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleTableViewCell.swift; sourceTree = "<group>"; };
+		9923C3462279D0CE00089340 /* PeopleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleService.swift; sourceTree = "<group>"; };
+		9923C3482279DD0C00089340 /* FollowService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowService.swift; sourceTree = "<group>"; };
 		99327D6022296C6400E74B22 /* Constante.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constante.swift; sourceTree = "<group>"; };
 		99327D622229853A00E74B22 /* LoadPostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadPostService.swift; sourceTree = "<group>"; };
 		99327D642229932B00E74B22 /* PostJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostJSON.swift; sourceTree = "<group>"; };
@@ -72,6 +83,7 @@
 		99A3584122204B4900FC4BC5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		99B5BD6F812FE0AC393D0603 /* Pods-AkGram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AkGram.release.xcconfig"; path = "Pods/Target Support Files/Pods-AkGram/Pods-AkGram.release.xcconfig"; sourceTree = "<group>"; };
 		99C96725227746BF00DFB9A9 /* HeaderProfileCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderProfileCollectionReusableView.swift; sourceTree = "<group>"; };
+		99C9672922779C5200DFB9A9 /* MyPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPosts.swift; sourceTree = "<group>"; };
 		99D6D3EC222D6A41004C6587 /* CommentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
 		99DF9A832224BB9700FE300F /* ShareService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareService.swift; sourceTree = "<group>"; };
 		99EA1FB2222ED41400C4CBB3 /* LikesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesService.swift; sourceTree = "<group>"; };
@@ -140,6 +152,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9923C33E2279B69600089340 /* CustomCollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				9923C33F2279B6CB00089340 /* PhotoCollectionViewCell.swift */,
+			);
+			path = CustomCollectionViewCells;
+			sourceTree = "<group>";
+		};
+		9923C3452279CF4B00089340 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				9923C3462279D0CE00089340 /* PeopleService.swift */,
+				9923C3482279DD0C00089340 /* FollowService.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		99327D66222993A700E74B22 /* Posts */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +177,7 @@
 				99327D642229932B00E74B22 /* PostJSON.swift */,
 				99D6D3EB222D6A14004C6587 /* Comment */,
 				99EA1FB1222ED3F700C4CBB3 /* Likes */,
+				99C9672822779BF500DFB9A9 /* MyPosts */,
 			);
 			path = Posts;
 			sourceTree = "<group>";
@@ -157,6 +187,7 @@
 			children = (
 				99327D682229F5D100E74B22 /* HomeTableViewCell.swift */,
 				995CF6A5222B486F00F8EBB9 /* CommentTableViewCell.swift */,
+				9923C3432279CC6400089340 /* PeopleTableViewCell.swift */,
 			);
 			path = CustomTableViewCells;
 			sourceTree = "<group>";
@@ -176,6 +207,14 @@
 				99C96725227746BF00DFB9A9 /* HeaderProfileCollectionReusableView.swift */,
 			);
 			path = CustomCollectionReusableView;
+			sourceTree = "<group>";
+		};
+		99C9672822779BF500DFB9A9 /* MyPosts */ = {
+			isa = PBXGroup;
+			children = (
+				99C9672922779C5200DFB9A9 /* MyPosts.swift */,
+			);
+			path = MyPosts;
 			sourceTree = "<group>";
 		};
 		99D6D3EB222D6A14004C6587 /* Comment */ = {
@@ -256,6 +295,7 @@
 				99FC3A8E221B7BEC009F053B /* CameraViewController.swift */,
 				99FC3A90221B7C04009F053B /* ActivityViewController.swift */,
 				99FC3A92221B7C11009F053B /* ProfileViewController.swift */,
+				9923C3412279CBBA00089340 /* PeopleViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -263,6 +303,7 @@
 		99FC3A7B221B0FF3009F053B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9923C33E2279B69600089340 /* CustomCollectionViewCells */,
 				99C96727227746C800DFB9A9 /* CustomCollectionReusableView */,
 				99327D672229F59400E74B22 /* CustomTableViewCells */,
 				99FC3A74221B0201009F053B /* Start.storyboard */,
@@ -293,6 +334,7 @@
 			children = (
 				99DF9A822224BA7D00FE300F /* Authentification */,
 				99327D66222993A700E74B22 /* Posts */,
+				9923C3452279CF4B00089340 /* User */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -493,6 +535,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9923C3422279CBBA00089340 /* PeopleViewController.swift in Sources */,
 				997B7D01222364C7003E3A30 /* SignInService.swift in Sources */,
 				99A35840222044BF00FC4BC5 /* Extension.swift in Sources */,
 				99C96726227746BF00DFB9A9 /* HeaderProfileCollectionReusableView.swift in Sources */,
@@ -500,15 +543,20 @@
 				99D6D3ED222D6A41004C6587 /* CommentService.swift in Sources */,
 				997B7CFF22231C30003E3A30 /* SignUpService.swift in Sources */,
 				99FC3A79221B0CE5009F053B /* SignUpViewController.swift in Sources */,
+				9923C3442279CC6400089340 /* PeopleTableViewCell.swift in Sources */,
 				99EA1FB3222ED41400C4CBB3 /* LikesService.swift in Sources */,
 				99FC3A77221B0530009F053B /* SignInViewController.swift in Sources */,
 				99327D652229932B00E74B22 /* PostJSON.swift in Sources */,
 				99FC3A55221B012D009F053B /* AppDelegate.swift in Sources */,
+				9923C3472279D0CE00089340 /* PeopleService.swift in Sources */,
+				9923C3492279DD0C00089340 /* FollowService.swift in Sources */,
 				995CF6A4222B484900F8EBB9 /* CommentViewController.swift in Sources */,
 				99FC3A83221B77F3009F053B /* HomeViewController.swift in Sources */,
 				99FC3A91221B7C04009F053B /* ActivityViewController.swift in Sources */,
 				99DF9A842224BB9700FE300F /* ShareService.swift in Sources */,
+				99C9672A22779C5200DFB9A9 /* MyPosts.swift in Sources */,
 				99FC3A8D221B7BDF009F053B /* DiscoverViewController.swift in Sources */,
+				9923C3402279B6CB00089340 /* PhotoCollectionViewCell.swift in Sources */,
 				99F1C17F22243B79004E36FA /* LogOutService.swift in Sources */,
 				99327D6122296C6400E74B22 /* Constante.swift in Sources */,
 				99FC3A93221B7C11009F053B /* ProfileViewController.swift in Sources */,

@@ -23,11 +23,11 @@ class LikesService {
                 likes = post["likes"] as? [String : Bool] ?? [:]
                 var likeCount = post["likeCount"] as? Int ?? 0
                 if let _ = likes[uid] {
-                    // Unstar the post and remove self from stars
+                    // Unstar the post and remove self from likes
                     likeCount -= 1
                     likes.removeValue(forKey: uid)
                 } else {
-                    // Star the post and add self to stars
+                    // Star the post and add self to likes
                     likeCount += 1
                     likes[uid] = true
                 }

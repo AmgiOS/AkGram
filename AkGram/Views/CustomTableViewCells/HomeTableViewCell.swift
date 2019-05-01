@@ -24,7 +24,7 @@ class HomeTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        nameLabel.text = ""
+        nameLabel.text = "User"
         captionLabel.text = "Added comment ..."
         tapGestureComment()
         GestureLike()
@@ -37,8 +37,8 @@ class HomeTableViewCell: UITableViewCell {
     var post: Post? {
         didSet {
             guard let post = post else { return }
-            captionLabel.text = post.descriptionPhoto
             
+            captionLabel.text = post.descriptionPhoto
             let image = URL(string: post.photoURL)
             postImageView.sd_setImage(with: image, completed: nil)
             
@@ -51,7 +51,7 @@ class HomeTableViewCell: UITableViewCell {
 
 extension HomeTableViewCell {
     
-    //MARK: - Functions
+    //MARK: - User Info
     private func loadUserInfo(_ currentUser: String) {
         postService.setUpUserInfo(currentUser) { (success, user) in
             if success, let user = user {
@@ -63,6 +63,7 @@ extension HomeTableViewCell {
         }
     }
     
+    //MARK: - Likes
     private func getLikesInDatabase(_ post: Post) {
         let isLiked = post.likes?[uidAccountUser] ?? false
         let imageName = post.likes == nil || !isLiked ? "like" : "likeSelected"
