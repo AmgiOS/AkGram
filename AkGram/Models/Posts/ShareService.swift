@@ -8,7 +8,6 @@
 
 import UIKit
 import FirebaseAuth
-import FirebaseDatabase
 import FirebaseStorage
 
 class ShareService {
@@ -44,17 +43,19 @@ class ShareService {
     
     //Create dictionnary in database with data uploaded
     private func uploadPostsInStorage(_ description: String, _ photoUrl: String) {
-        let newUserReference = Database.database().reference().child("posts")
+        let newUserReference = refDatabase.child("posts")
         guard let newPostsID = newUserReference.childByAutoId().key else { return }
         newUidPostWhenShare = newPostsID
         let newPostReference = newUserReference.child(newPostsID)
         guard let currentUser = Auth.auth().currentUser else { return }
         let currentUserId = currentUser.uid
-        newPostReference.setValue(["uid": currentUserId ,"photoURL" : photoUrl, "descriptionPhoto": description, "idPost": newPostsID]) { (error, reference) in
+        newPostReference.setValue(["uid": currentUserId ,"photoURL" : photoUrl, "descriptionPhoto": description, "idPost": newPostsID, "likeCount": 0]) { (error, reference) in
             guard error == nil else {
                 print("error upload image and Description")
                 return
             }
+            
+            refDatabase.child("feed").child(uidAccountUser).child(newPostsID).setValue(true)
             print("success to share post")
         }
     }

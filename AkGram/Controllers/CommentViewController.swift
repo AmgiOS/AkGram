@@ -65,6 +65,7 @@ extension CommentViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.comment = arrayComments[indexPath.row]
         cell.commentVC = self
+        cell.delegate = self
         
         return cell
     }
@@ -88,6 +89,7 @@ extension CommentViewController {
     }
     
     private func downloadComment() {
+        arrayComments.removeAll()
         commentService.downloadCommentInPostId(idPost) { (success, comments) in
             if success, let comment = comments {
                 self.arrayComments.append(comment)
@@ -119,6 +121,20 @@ extension CommentViewController {
         } else {
             constraintToBottom.constant = 0
             self.view.layoutIfNeeded()
+        }
+    }
+}
+
+extension CommentViewController: CommentTableViewCellDelegate {
+    //MARK: - Perfom Segue
+    func goToProfileUser(userId: String) {
+        performSegue(withIdentifier: "Comment_Segue_Profile", sender: userId)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Comment_Segue_Profile" {
+            guard let profileVC = segue.destination as? ProfileUserViewController else { return }
+            profileVC.userId = sender as? String ?? ""
         }
     }
 }

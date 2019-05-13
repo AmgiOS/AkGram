@@ -15,12 +15,18 @@ let idStorage = "gs://akgram-31c3b.appspot.com"
 
 //Reference to Realtime Database For Get Data
 let refDatabase = Database.database().reference()
+var refFollowers = refDatabase.child("followers")
 
 //Uid to current User
-let uidAccountUser = Auth.auth().currentUser?.uid ?? ""
+var uidAccountUser: String {
+    return Auth.auth().currentUser?.uid ?? ""
+}
 
 //New Uid When post is Share in Home
 var newUidPostWhenShare = ""
 
 //Get Uid User Index Path
-var uidUserFollow = ""
+var uidUserFollow = String()
+
+//all uid Users
+var uidAllUsers = [String]()

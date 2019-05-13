@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CommentTableViewCellDelegate {
+    func goToProfileUser(userId: String)
+}
+
 class CommentTableViewCell: UITableViewCell {
     
     //MARK: - @IBOutlet
@@ -19,11 +23,13 @@ class CommentTableViewCell: UITableViewCell {
         super.awakeFromNib()
         nameLabel.text = ""
         commentLabel.text = ""
+        gestureName()
     }
     
     //MARK: - Vars
     var postService = LoadPostService()
     var commentVC: CommentViewController?
+    var delegate: CommentTableViewCellDelegate?
     
     var comment: Comment? {
         didSet{
@@ -46,5 +52,18 @@ extension CommentTableViewCell {
                 self.profileImageView.sd_setImage(with: image, placeholderImage: UIImage(named: "placeholderImg"), options: .continueInBackground, progress: nil, completed: nil)
             }
         }
+    }
+}
+
+extension CommentTableViewCell {
+    //MARK: - TapGestureRecognizerName
+    private func gestureName() {
+        nameLabel.isUserInteractionEnabled = true
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGestureName))
+        nameLabel.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    @objc func tapGestureName() {
+        delegate?.goToProfileUser(userId: comment?.uid ?? "")
     }
 }

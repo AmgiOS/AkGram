@@ -1,34 +1,34 @@
 //
-//  ProfileViewController.swift
+//  ProfileUserViewController.swift
 //  AkGram
 //
-//  Created by Amg on 19/02/2019.
+//  Created by Amg on 13/05/2019.
 //  Copyright © 2019 Amg-Industries. All rights reserved.
 //
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileUserViewController: UIViewController {
     //MARK: - Vars
-    var userProfile: User?
     var postService = LoadPostService()
     var myPostsProfile = MyPosts()
+    var userProfile: User?
+    var userId = ""
     var posts = [Post]()
     
-    //MARK: - @IBOutlet
-    @IBOutlet weak var collectionViewProfile: UICollectionView!
+    //MARK: - @IBOutlets
+    @IBOutlet weak var profileUserCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUp()
-        loadUserInfo(uidAccountUser)
+        loadUserInfo()
         getPostsUser()
     }
     
-    //MARK: - @IBAction
+    //MARK: - @IBActions
 }
 
-extension ProfileViewController: UICollectionViewDataSource {
+extension ProfileUserViewController: UICollectionViewDataSource {
     //MARK: - CollectionView
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return posts.count
@@ -51,7 +51,7 @@ extension ProfileViewController: UICollectionViewDataSource {
     }
 }
 
-extension ProfileViewController: UICollectionViewDelegateFlowLayout {
+extension ProfileUserViewController: UICollectionViewDelegateFlowLayout {
     //MARK: Collection View Flow Layout for Size Cells
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.size.width / 3 - 1, height: collectionView.frame.size.width / 3 - 1)
@@ -66,28 +66,23 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension ProfileViewController {
+extension ProfileUserViewController {
     //MARK: - Functions
-    private func setUp() {
-        collectionViewProfile.dataSource = self
-        collectionViewProfile.delegate = self
-    }
-    
-    private func loadUserInfo(_ currentUser: String) {
-        postService.setUpUserInfo(currentUser) { (success, user) in
+    private func loadUserInfo() {
+        postService.setUpUserInfo(userId) { (success, user) in
             if success, let user = user {
                 self.userProfile = user
                 self.navigationItem.title = user.username
-                self.collectionViewProfile.reloadData()
+                self.profileUserCollectionView.reloadData()
             }
         }
     }
     
     private func getPostsUser() {
-        myPostsProfile.fetchMyPosts(currentId: uidAccountUser) { (success, posts) in
+        myPostsProfile.fetchMyPosts(currentId: userId) { (success, posts) in
             if success, let post = posts {
                 self.posts.append(post)
-                self.collectionViewProfile.reloadData()
+                self.profileUserCollectionView.reloadData()
             }
         }
     }

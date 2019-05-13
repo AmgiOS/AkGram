@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol PeopleTableViewCellDelegate {
+    func goToProfileUser(userId: String)
+}
+
 class PeopleTableViewCell: UITableViewCell {
     //MARK: - @IBoutlet
     @IBOutlet weak var profileImageView: UIImageView!
@@ -16,20 +20,18 @@ class PeopleTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        followButton.setTitle("", for: .normal)
+        configureStateButton(followButton)
+        gestureName()
     }
 
     //MARK: - Vars
     var followService = FollowService()
+    var delegate: PeopleTableViewCellDelegate?
     
     var users: User? {
         didSet {
             updateView()
-        }
-    }
-    
-    var uidUserChoice: String? {
-        didSet {
-            uidUserFollow = uidUserChoice ?? ""
         }
     }
 }
@@ -43,15 +45,61 @@ extension PeopleTableViewCell {
         profileImageView.sd_setImage(with: image, placeholderImage: UIImage(named: "placeholderImg"), options: .continueInBackground, progress: nil, completed: nil)
         nameLabel.text = user.username
         
-        followButton.addTarget(self, action: #selector(followAction), for: .touchUpInside)
-        followButton.addTarget(self, action: #selector(unFollowAction), for: .touchUpInside)
+        user.isFollowing { (values) in
+            DispatchQueue.main.async {
+                if let value = values, value {
+                    self.configureButtonUnfollow()
+                } else {
+                    self.configureFollowButton()
+                }
+            }
+        }
     }
     
     @objc func followAction() {
         followService.followUploadInDatabase()
+        configureButtonUnfollow()
     }
     
     @objc func unFollowAction() {
-//        followService.unFollowUploadInDatabase()
+        followService.unFollowUploadInDatabase()
+        configureFollowButton()
+    }
+}
+
+extension PeopleTableViewCell {
+    //MARK: - Functions
+    private func configureButtonUnfollow() {
+        followButton.setTitle("Following", for: .normal)
+        followButton.setTitleColor(.black, for: .normal)
+        followButton.backgroundColor = UIColor.clear
+        followButton.addTarget(self, action: #selector(unFollowAction), for: .touchUpInside)
+    }
+    
+    private func configureFollowButton() {
+        followButton.setTitle("Follow", for: .normal)
+        followButton.setTitleColor(.white, for: .normal)
+        followButton.backgroundColor = UIColor.black
+        followButton.addTarget(self, action: #selector(followAction), for: .touchUpInside)
+    }
+    
+    private func configureStateButton(_ button: UIButton) {
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor(red: 226/255, green: 228/255, blue: 232.255, alpha: 1).cgColor
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+    }
+}
+
+extension PeopleTableViewCell {
+    //MARK: - TapGestureRecognizerName
+    private func gestureName() {
+        nameLabel.isUserInteractionEnabled = true
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGestureName))
+        nameLabel.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    @objc func tapGestureName() {
+        delegate?.goToProfileUser(userId: users?.id ?? "")
     }
 }

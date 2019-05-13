@@ -11,6 +11,7 @@ import UIKit
 class PeopleViewController: UIViewController {
     //MARK: - Vars
     var people = PeopleService()
+    var follow = FollowService()
     var users = [User]()
     var idUsers = [String]()
     
@@ -19,15 +20,22 @@ class PeopleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         getAllUsers()
     }
     
     //MARK: - @IBActions
+    @IBAction func clickedButton(_ sender: UIButton) {
+        let buttonPosition = sender.convert(CGPoint.zero, to: self.peopleTableView)
+        guard let indexPath = peopleTableView.indexPathForRow(at: buttonPosition) else { return }
+        uidUserFollow = idUsers[indexPath.row]
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ProfileSegue" {
+            guard let profileUserVc = segue.destination as? ProfileUserViewController else { return }
+            profileUserVc.userId = sender as! String
+        }
+    }
 }
 
 extension PeopleViewController: UITableViewDataSource, UITableViewDelegate {
@@ -41,11 +49,15 @@ extension PeopleViewController: UITableViewDataSource, UITableViewDelegate {
         
         let user = users[indexPath.row]
         let usersID = idUsers[indexPath.row]
-        
+        uidAllUsers = [usersID]
         
         cell.users = user
-        cell.uidUserChoice = usersID
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let userId = users[indexPath.row]
+        performSegue(withIdentifier: "ProfileSegue", sender: userId.id)
     }
 }
 

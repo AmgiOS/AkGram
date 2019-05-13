@@ -39,15 +39,15 @@ class SignUpService {
                         return
                     }
                     
-                    self.uploadDataInStorage(user: user, username, email, urlImage)
+                    self.uploadDataInStorage(user: user, username, email, urlImage, user)
                     onSuccess(true)
                 })
             })
         }
     }
     
-    private func uploadDataInStorage(user: String, _ username: String, _ email: String, _ profileImage: String) {
+    private func uploadDataInStorage(user: String, _ username: String, _ email: String, _ profileImage: String, _ id: String) {
         let newUserReference = Database.database().reference().child("users").child(user)
-        newUserReference.setValue(["username" : username, "email": email, "profileImage": profileImage])
+        newUserReference.setValue(["username" : username, "username_lowercase": username.lowercased(), "email": email, "profileImage": profileImage, "id": id])
     }
 }

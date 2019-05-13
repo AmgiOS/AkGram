@@ -56,6 +56,7 @@ extension UIViewController {
     func connectedScreen() {
         let hud = JGProgressHUD(style: .dark)
         hud.indicatorView = JGProgressHUDSuccessIndicatorView(contentView: self.view)
+        hud.tintColor = UIColor.green
         hud.textLabel.text = "Connected"
         hud.show(in: self.view, animated: true)
         hud.dismiss(afterDelay: 1.0)

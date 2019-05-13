@@ -18,7 +18,6 @@ class PhotoCollectionViewCell: UICollectionViewCell {
             setUpProfile()
         }
     }
-    
 }
 
 extension PhotoCollectionViewCell {

@@ -12,7 +12,7 @@ import FirebaseAuth
 import CodableFirebase
 
 class MyPosts {
-    let refDatabaseMyPosts = refDatabase.child("myPosts").child(uidAccountUser)
+    let refDatabaseMyPosts = refDatabase.child("myPosts")
     let refPosts = refDatabase.child("posts")
     
     //MARK: - Functions
@@ -26,22 +26,24 @@ class MyPosts {
         }
     }
     
-    func fetchMyPosts(completionHandler: @escaping (Bool, Post?) -> Void) {
-        refDatabaseMyPosts.observe(.childAdded) { (snapshot) in
-            
-            let key = snapshot.key
-            self.observePostsToUser(withId: key, completionHandler: { (success, posts) in
-                if success, let post = posts {
-                    completionHandler(true, post)
-                } else {
-                    completionHandler(false, nil)
-                    print("error To Observe Posts to User")
-                }
-            })
+    func fetchMyPosts(currentId: String, completionHandler: @escaping (Bool, Post?) -> Void) {
+        DispatchQueue.main.async {
+            self.refDatabaseMyPosts.child(currentId).observe(.childAdded) { (snapshot) in
+                
+                let key = snapshot.key
+                self.observePostsToUser(withId: key, completionHandler: { (success, posts) in
+                    if success, let post = posts {
+                        completionHandler(true, post)
+                    } else {
+                        completionHandler(false, nil)
+                        print("error To Observe Posts to User")
+                    }
+                })
+            }
         }
     }
     
-    private func observePostsToUser(withId id: String, completionHandler: @escaping (Bool, Post?) -> Void) {
+    func observePostsToUser(withId id: String, completionHandler: @escaping (Bool, Post?) -> Void) {
         refPosts.child(id).observeSingleEvent(of: .value) { (snapshot) in
             
             guard let value = snapshot.value else { return }

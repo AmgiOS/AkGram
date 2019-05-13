@@ -39,11 +39,11 @@ class SignUpViewController: UIViewController {
         
         signUpService.signUp(username, email, password, imageJPEG ?? Data(), onSuccess: { (success) in
             if success {
-                self.dismissLoadingScreen()
                 self.successScreen()
                 self.performSegue(withIdentifier: "signInToTabBar", sender: nil)
             }
         }) { (error) in
+            self.dismissLoadingScreen()
             self.errorScreen(error ?? "")
         }
     }

@@ -30,6 +30,22 @@ class LoadPostService {
         })
     }
     
+    //Get recents Post in Discover
+    func observeTopPosts(completionHandler: @escaping (Bool, Post?) -> Void) {
+        refDatabase.child("posts").queryOrdered(byChild: "likeCount").observeSingleEvent(of: .value) { (snapshot) in
+            guard let arraySnaphot = (snapshot.children.allObjects as? [DataSnapshot])?.reversed() else { return }
+            arraySnaphot.forEach({ (child) in
+                do {
+                    let data = try FirebaseDecoder().decode(Post.self, from: child.value ?? "")
+                    completionHandler(true, data)
+                } catch {
+                    print("error decode data")
+                    completionHandler(false, nil)
+                }
+            })
+        }
+    }
+    
     //Get User info in each post
     func setUpUserInfo(_ currentUser: String, completionHandler: @escaping (Bool, User?) -> Void) {
         refDatabase.child("users").child(currentUser).observeSingleEvent(of: .value) { (snapshot) in
@@ -40,7 +56,7 @@ class LoadPostService {
                     let data = try FirebaseDecoder().decode(User.self, from: value)
                     completionHandler(true, data)
                 } catch {
-                    print("error decode data")
+                    print("error decode data User Home")
                     completionHandler(false, nil)
                 }
             }

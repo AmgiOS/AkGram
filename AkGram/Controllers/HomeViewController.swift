@@ -10,8 +10,10 @@ import UIKit
 
 class HomeViewController: UIViewController {
     //MARK: - Vars
+    var feedService = Feed()
     var postService = LoadPostService()
     var postData = [Post]()
+    var userData = [User]()
     
     //MARK: - @IBOutlet
     @IBOutlet weak var postsTableView: UITableView!
@@ -20,11 +22,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         connectedScreen()
-        setUp()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         loadData()
     }
     
@@ -34,13 +31,6 @@ class HomeViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Start", bundle: nil)
         let signInVC = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
         self.present(signInVC, animated: true, completion: nil)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "commentSegue" {
-            guard let commentVC = segue.destination as? CommentViewController else { return }
-            commentVC.idPost = sender as? String ?? ""
-        }
     }
 }
 
@@ -57,28 +47,71 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         let post = postData[indexPath.row]
         cell.post = post
+        
+        if userData.count > 1 {
+            let user = userData[indexPath.row]
+            cell.user = user
+        }
+        
         cell.homeVC = self
+        cell.delegate = self
         
         return cell
     }
 }
 
 extension HomeViewController {
-    //MARK: - Functions
-    private func setUp() {
-        postsTableView.delegate = self
-        postsTableView.dataSource = self
-    }
-    
+    //MARK: - Load Posts
     private func loadData() {
-        self.postData.removeAll()
         activityIndicator.isHidden = false
-        postService.reloadPosts { (success, posts) in
+        feedService.uploadFeed { (success, posts) in
             if success, let post = posts {
                 self.activityIndicator.isHidden = true
-                self.postData.insert(post, at: 0)
+                self.postData.append(post)
+                self.loadUserInfo(post.uid)
                 self.postsTableView.reloadData()
             }
+        }
+        
+        feedService.observeRemoveFeed { (success, posts) in
+            if success, let post = posts {
+                self.postData = self.postData.filter { $0.idPost != post.idPost }
+                self.userData = self.userData.filter { $0.id != post.uid}
+                self.postsTableView.reloadData()
+            }
+        }
+    }
+    
+    //MARK: - User Info
+    func loadUserInfo(_ currentUserPost: String) {
+        postService.setUpUserInfo(currentUserPost) { (success, user) in
+            if success, let user = user {
+                self.userData.append(user)
+                self.postsTableView.reloadData()
+            }
+        }
+    }
+}
+
+extension HomeViewController: HomeTableViewCellDelegate {
+    
+    //MARK: - Perfom Segue
+    func commentToSegue(postId: String) {
+        performSegue(withIdentifier: "commentSegue", sender: postId)
+    }
+    
+    func goToProfileUser(userUid: String) {
+        performSegue(withIdentifier: "Home_Segue_Profile", sender: userUid)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "commentSegue" {
+            guard let commentVC = segue.destination as? CommentViewController else { return }
+            commentVC.idPost = sender as? String ?? ""
+            
+        } else if segue.identifier == "Home_Segue_Profile" {
+            guard let profileVC = segue.destination as? ProfileUserViewController else { return }
+            profileVC.userId = sender as? String ?? ""
         }
     }
 }

@@ -17,8 +17,10 @@
 		99327D632229853A00E74B22 /* LoadPostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99327D622229853A00E74B22 /* LoadPostService.swift */; };
 		99327D652229932B00E74B22 /* PostJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99327D642229932B00E74B22 /* PostJSON.swift */; };
 		99327D692229F5D100E74B22 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99327D682229F5D100E74B22 /* HomeTableViewCell.swift */; };
+		994B66552289BE2100FD3241 /* ProfileUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994B66542289BE2100FD3241 /* ProfileUserViewController.swift */; };
 		995CF6A4222B484900F8EBB9 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995CF6A3222B484900F8EBB9 /* CommentViewController.swift */; };
 		995CF6A6222B486F00F8EBB9 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995CF6A5222B486F00F8EBB9 /* CommentTableViewCell.swift */; };
+		997A400B2288713D00FA4ADB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997A400A2288713D00FA4ADB /* SearchViewController.swift */; };
 		997B7CFF22231C30003E3A30 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997B7CFE22231C30003E3A30 /* SignUpService.swift */; };
 		997B7D01222364C7003E3A30 /* SignInService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997B7D00222364C7003E3A30 /* SignInService.swift */; };
 		99A35840222044BF00FC4BC5 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A3583F222044BF00FC4BC5 /* Extension.swift */; };
@@ -27,6 +29,7 @@
 		99C9672A22779C5200DFB9A9 /* MyPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C9672922779C5200DFB9A9 /* MyPosts.swift */; };
 		99D6D3ED222D6A41004C6587 /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D6D3EC222D6A41004C6587 /* CommentService.swift */; };
 		99DF9A842224BB9700FE300F /* ShareService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DF9A832224BB9700FE300F /* ShareService.swift */; };
+		99E021CE22874BE100B31C95 /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E021CD22874BE100B31C95 /* FeedService.swift */; };
 		99EA1FB3222ED41400C4CBB3 /* LikesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EA1FB2222ED41400C4CBB3 /* LikesService.swift */; };
 		99F1C17F22243B79004E36FA /* LogOutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F1C17E22243B79004E36FA /* LogOutService.swift */; };
 		99FC3A55221B012D009F053B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99FC3A54221B012D009F053B /* AppDelegate.swift */; };
@@ -75,8 +78,10 @@
 		99327D622229853A00E74B22 /* LoadPostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadPostService.swift; sourceTree = "<group>"; };
 		99327D642229932B00E74B22 /* PostJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostJSON.swift; sourceTree = "<group>"; };
 		99327D682229F5D100E74B22 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		994B66542289BE2100FD3241 /* ProfileUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserViewController.swift; sourceTree = "<group>"; };
 		995CF6A3222B484900F8EBB9 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		995CF6A5222B486F00F8EBB9 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		997A400A2288713D00FA4ADB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		997B7CFE22231C30003E3A30 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
 		997B7D00222364C7003E3A30 /* SignInService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInService.swift; sourceTree = "<group>"; };
 		99A3583F222044BF00FC4BC5 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -86,6 +91,7 @@
 		99C9672922779C5200DFB9A9 /* MyPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPosts.swift; sourceTree = "<group>"; };
 		99D6D3EC222D6A41004C6587 /* CommentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
 		99DF9A832224BB9700FE300F /* ShareService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareService.swift; sourceTree = "<group>"; };
+		99E021CD22874BE100B31C95 /* FeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; };
 		99EA1FB2222ED41400C4CBB3 /* LikesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesService.swift; sourceTree = "<group>"; };
 		99F1C17E22243B79004E36FA /* LogOutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutService.swift; sourceTree = "<group>"; };
 		99FC3A51221B012D009F053B /* AkGram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AkGram.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,8 +169,8 @@
 		9923C3452279CF4B00089340 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				9923C3462279D0CE00089340 /* PeopleService.swift */,
-				9923C3482279DD0C00089340 /* FollowService.swift */,
+				99E021CB22874B6C00B31C95 /* FollowPeople */,
+				99E021CC22874BB200B31C95 /* MyFeed */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -174,7 +180,6 @@
 			children = (
 				99327D622229853A00E74B22 /* LoadPostService.swift */,
 				99DF9A832224BB9700FE300F /* ShareService.swift */,
-				99327D642229932B00E74B22 /* PostJSON.swift */,
 				99D6D3EB222D6A14004C6587 /* Comment */,
 				99EA1FB1222ED3F700C4CBB3 /* Likes */,
 				99C9672822779BF500DFB9A9 /* MyPosts */,
@@ -233,6 +238,23 @@
 				99F1C17E22243B79004E36FA /* LogOutService.swift */,
 			);
 			path = Authentification;
+			sourceTree = "<group>";
+		};
+		99E021CB22874B6C00B31C95 /* FollowPeople */ = {
+			isa = PBXGroup;
+			children = (
+				9923C3462279D0CE00089340 /* PeopleService.swift */,
+				9923C3482279DD0C00089340 /* FollowService.swift */,
+			);
+			path = FollowPeople;
+			sourceTree = "<group>";
+		};
+		99E021CC22874BB200B31C95 /* MyFeed */ = {
+			isa = PBXGroup;
+			children = (
+				99E021CD22874BE100B31C95 /* FeedService.swift */,
+			);
+			path = MyFeed;
 			sourceTree = "<group>";
 		};
 		99EA1FB1222ED3F700C4CBB3 /* Likes */ = {
@@ -296,6 +318,8 @@
 				99FC3A90221B7C04009F053B /* ActivityViewController.swift */,
 				99FC3A92221B7C11009F053B /* ProfileViewController.swift */,
 				9923C3412279CBBA00089340 /* PeopleViewController.swift */,
+				997A400A2288713D00FA4ADB /* SearchViewController.swift */,
+				994B66542289BE2100FD3241 /* ProfileUserViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -332,6 +356,7 @@
 		99FC3A7D221B1647009F053B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				99327D642229932B00E74B22 /* PostJSON.swift */,
 				99DF9A822224BA7D00FE300F /* Authentification */,
 				99327D66222993A700E74B22 /* Posts */,
 				9923C3452279CF4B00089340 /* User */,
@@ -535,6 +560,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				997A400B2288713D00FA4ADB /* SearchViewController.swift in Sources */,
 				9923C3422279CBBA00089340 /* PeopleViewController.swift in Sources */,
 				997B7D01222364C7003E3A30 /* SignInService.swift in Sources */,
 				99A35840222044BF00FC4BC5 /* Extension.swift in Sources */,
@@ -546,6 +572,7 @@
 				9923C3442279CC6400089340 /* PeopleTableViewCell.swift in Sources */,
 				99EA1FB3222ED41400C4CBB3 /* LikesService.swift in Sources */,
 				99FC3A77221B0530009F053B /* SignInViewController.swift in Sources */,
+				99E021CE22874BE100B31C95 /* FeedService.swift in Sources */,
 				99327D652229932B00E74B22 /* PostJSON.swift in Sources */,
 				99FC3A55221B012D009F053B /* AppDelegate.swift in Sources */,
 				9923C3472279D0CE00089340 /* PeopleService.swift in Sources */,
@@ -557,6 +584,7 @@
 				99C9672A22779C5200DFB9A9 /* MyPosts.swift in Sources */,
 				99FC3A8D221B7BDF009F053B /* DiscoverViewController.swift in Sources */,
 				9923C3402279B6CB00089340 /* PhotoCollectionViewCell.swift in Sources */,
+				994B66552289BE2100FD3241 /* ProfileUserViewController.swift in Sources */,
 				99F1C17F22243B79004E36FA /* LogOutService.swift in Sources */,
 				99327D6122296C6400E74B22 /* Constante.swift in Sources */,
 				99FC3A93221B7C11009F053B /* ProfileViewController.swift in Sources */,
