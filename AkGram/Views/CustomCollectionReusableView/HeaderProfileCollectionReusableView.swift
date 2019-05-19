@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol HeaderProfileCollectionReusableViewDelegateSwitchSettingsVC {
+    func goToSettingsVC()
+}
+
 class HeaderProfileCollectionReusableView: UICollectionReusableView {
     //MARK: - @IBOutlets
     @IBOutlet weak var profileImageView: UIImageView!
@@ -25,6 +29,8 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
     
     //MARK: - Vars
     var followService = FollowService()
+    var myPosts = MyPosts()
+    var delegateToSettingsVC: HeaderProfileCollectionReusableViewDelegateSwitchSettingsVC?
     
     var user: User? {
         didSet {
@@ -46,11 +52,15 @@ extension HeaderProfileCollectionReusableView {
     private func updateView() {
         guard let user = user else { return }
         self.nameProfileLabel.text = user.username
+        uidUserFollow = user.id
         
         let image = URL(string: user.profileImage)
         self.profileImageView.sd_setImage(with: image, placeholderImage: UIImage(named: "placeholderImg"), options: .continueInBackground, progress: nil, completed: nil)
         
         checkProfileUser()
+        fetchCountPosts()
+        fetchCountFollow()
+        fetchCountFollowers()
     }
 }
 
@@ -58,22 +68,15 @@ extension HeaderProfileCollectionReusableView {
     //MARK: - TapGestureRecognizer Button Edit/Follow
     private func checkProfileUser() {
         if user?.id == uidAccountUser {
-            followButton.setTitle("Edit Profilee", for: .normal)
+            followButton.setTitle("Edit Profile", for: .normal)
+            followButton.addTarget(self, action: #selector(goTosettingsVC), for: .touchUpInside)
         } else {
             updateStateFollowButton()
         }
     }
     
-    private func updateStateFollowButton() {
-        user?.isFollowing { (values) in
-            DispatchQueue.main.async {
-                if let value = values, value {
-                    self.configureButtonUnfollow()
-                } else {
-                    self.configureFollowButton()
-                }
-            }
-        }
+    @objc func goTosettingsVC() {
+        delegateToSettingsVC?.goToSettingsVC()
     }
 }
 
@@ -108,5 +111,39 @@ extension HeaderProfileCollectionReusableView {
         button.layer.borderColor = UIColor(red: 226/255, green: 228/255, blue: 232.255, alpha: 1).cgColor
         button.layer.cornerRadius = 5
         button.clipsToBounds = true
+    }
+}
+
+extension HeaderProfileCollectionReusableView {
+    //MARK: - Functions
+    private func updateStateFollowButton() {
+        user?.isFollowing(uidUser: user?.id ?? "") { (values) in
+            DispatchQueue.main.async {
+                if let value = values, value {
+                    self.configureButtonUnfollow()
+                } else {
+                    self.configureFollowButton()
+                }
+            }
+        }
+    }
+    
+    //Display Count In Profile
+    private func fetchCountPosts() {
+        myPosts.fetchMyCountPosts(user?.id ?? "") { (count) in
+            self.myPostCountLabel.text = "\(count)"
+        }
+    }
+    
+    private func fetchCountFollow() {
+        followService.fetchCountFollowUser(user?.id ?? "") { (count) in
+            self.followingCountLabel.text = "\(count)"
+        }
+    }
+    
+    private func fetchCountFollowers() {
+        followService.fetchCountFollowerUser(user?.id ?? "") { (count) in
+            self.followersCountLabel.text = "\(count)"
+        }
     }
 }

@@ -18,14 +18,13 @@ class DiscoverViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         getTopPosts()
     }
 
     //MARK: - @IBAction
+    @IBAction func refreshButton(_ sender: Any) {
+        getTopPosts()
+    }
 }
 
 extension DiscoverViewController: UICollectionViewDataSource {
@@ -40,6 +39,7 @@ extension DiscoverViewController: UICollectionViewDataSource {
         }
         let posts = postsData[indexPath.row]
         cell.posts = posts
+        cell.delegate = self
         return cell
     }
 }
@@ -62,12 +62,29 @@ extension DiscoverViewController: UICollectionViewDelegateFlowLayout {
 extension DiscoverViewController {
     //MARK: - Get Top Posts
     private func getTopPosts() {
+        LoadingScreen()
         postsData.removeAll()
         postService.observeTopPosts { (success, posts) in
             if success, let post = posts {
+                self.dismissLoadingScreen()
                 self.postsData.append(post)
                 self.discoverCollectionView.reloadData()
             }
+            self.dismissLoadingScreen()
+        }
+    }
+}
+
+extension DiscoverViewController: PhotoCollectionViewCellDelegate {
+    //MARK: - Go To Details
+    func goToDetailVC(postID: String) {
+        performSegue(withIdentifier: "Discover_DetailSegue", sender: postID)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Discover_DetailSegue" {
+            guard let detailVC = segue.destination as? DetailViewController else { return }
+            detailVC.postID = sender as? String ?? ""
         }
     }
 }

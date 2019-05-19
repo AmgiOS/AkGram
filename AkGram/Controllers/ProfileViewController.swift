@@ -39,6 +39,7 @@ extension ProfileViewController: UICollectionViewDataSource {
         
         let post = posts[indexPath.row]
         cell.posts = post
+        cell.delegate = self
         
         return cell
     }
@@ -46,6 +47,7 @@ extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let headerViewCell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderProfileCollectionReusableView", for: indexPath) as? HeaderProfileCollectionReusableView else { return UICollectionReusableView()}
         headerViewCell.user = userProfile
+        headerViewCell.delegateToSettingsVC = self
         
         return headerViewCell
     }
@@ -84,11 +86,40 @@ extension ProfileViewController {
     }
     
     private func getPostsUser() {
-        myPostsProfile.fetchMyPosts(currentId: uidAccountUser) { (success, posts) in
+        self.myPostsProfile.fetchMyPosts(currentId: uidAccountUser) { (success, posts) in
             if success, let post = posts {
                 self.posts.append(post)
                 self.collectionViewProfile.reloadData()
             }
         }
+    }
+}
+
+extension ProfileViewController: HeaderProfileCollectionReusableViewDelegateSwitchSettingsVC {
+    //MARK: - Switch Settings VC
+    func goToSettingsVC() {
+        performSegue(withIdentifier: "Profile_SettingSegue", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Profile_SettingSegue" {
+            let settingsVC = segue.destination as? SettingsTableViewController
+            settingsVC?.delegate = self
+        } else if segue.identifier == "Profile_SegueDetail" {
+            let detailsVC = segue.destination as? DetailViewController
+            detailsVC?.postID = sender as? String ?? ""
+        }
+    }
+}
+
+extension ProfileViewController: SettingsTableViewControllerDelegate {
+    func updateUserInfo() {
+        loadUserInfo(uidAccountUser)
+    }
+}
+
+extension ProfileViewController: PhotoCollectionViewCellDelegate {
+    func goToDetailVC(postID: String) {
+        performSegue(withIdentifier: "Profile_SegueDetail", sender: postID)
     }
 }

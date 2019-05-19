@@ -33,7 +33,8 @@ class PeopleViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ProfileSegue" {
             guard let profileUserVc = segue.destination as? ProfileUserViewController else { return }
-            profileUserVc.userId = sender as! String
+            profileUserVc.userId = sender as? String ?? ""
+            profileUserVc.delegate = self
         }
     }
 }
@@ -48,8 +49,6 @@ extension PeopleViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PeopleTableViewCell", for: indexPath) as? PeopleTableViewCell else { return UITableViewCell()}
         
         let user = users[indexPath.row]
-        let usersID = idUsers[indexPath.row]
-        uidAllUsers = [usersID]
         
         cell.users = user
         return cell
@@ -57,6 +56,7 @@ extension PeopleViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let userId = users[indexPath.row]
+        uidUserFollow = userId.id
         performSegue(withIdentifier: "ProfileSegue", sender: userId.id)
     }
 }
@@ -71,5 +71,12 @@ extension PeopleViewController {
                 self.peopleTableView.reloadData()
             }
         }
+    }
+}
+
+extension PeopleViewController: ProfileUserViewControllerDelegate {
+    func updateFollowInfo() {
+        users.removeAll()
+        getAllUsers()
     }
 }

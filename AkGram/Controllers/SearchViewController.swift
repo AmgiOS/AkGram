@@ -30,7 +30,6 @@ class SearchViewController: UIViewController {
         guard let indexPath = searchUsersTableView.indexPathForRow(at: buttonPosition) else { return }
         uidUserFollow = idUsers[indexPath.row]
     }
-    
 }
 
 extension SearchViewController: UITableViewDataSource {
@@ -42,8 +41,6 @@ extension SearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PeopleTableViewCell", for: indexPath) as? PeopleTableViewCell else { return UITableViewCell()}
         let users = searchUsers[indexPath.row]
-        let usersID = idUsers[indexPath.row]
-        uidAllUsers = [usersID]
         
         cell.users = users
         cell.delegate = self
@@ -97,7 +94,14 @@ extension SearchViewController: PeopleTableViewCellDelegate {
         if segue.identifier == "Discover_Segue_Profile" {
             guard let profileVC = segue.destination as? ProfileUserViewController else { return }
             profileVC.userId = sender as? String ?? ""
-            
+            profileVC.delegate = self
         }
+    }
+}
+
+extension SearchViewController: ProfileUserViewControllerDelegate {
+    //MARK: - Reload Info Users
+    func updateFollowInfo() {
+        doSearch()
     }
 }

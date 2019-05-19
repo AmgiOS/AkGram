@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ProfileUserViewControllerDelegate {
+    func updateFollowInfo()
+}
+
 class ProfileUserViewController: UIViewController {
     //MARK: - Vars
     var postService = LoadPostService()
@@ -15,6 +19,7 @@ class ProfileUserViewController: UIViewController {
     var userProfile: User?
     var userId = ""
     var posts = [Post]()
+    var delegate: ProfileUserViewControllerDelegate?
     
     //MARK: - @IBOutlets
     @IBOutlet weak var profileUserCollectionView: UICollectionView!
@@ -25,7 +30,10 @@ class ProfileUserViewController: UIViewController {
         getPostsUser()
     }
     
-    //MARK: - @IBActions
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        delegate?.updateFollowInfo()
+    }
 }
 
 extension ProfileUserViewController: UICollectionViewDataSource {
@@ -39,6 +47,7 @@ extension ProfileUserViewController: UICollectionViewDataSource {
         
         let post = posts[indexPath.row]
         cell.posts = post
+        cell.delegate = self
         
         return cell
     }
@@ -46,6 +55,7 @@ extension ProfileUserViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let headerViewCell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderProfileCollectionReusableView", for: indexPath) as? HeaderProfileCollectionReusableView else { return UICollectionReusableView()}
         headerViewCell.user = userProfile
+        headerViewCell.delegateToSettingsVC = self
         
         return headerViewCell
     }
@@ -79,11 +89,33 @@ extension ProfileUserViewController {
     }
     
     private func getPostsUser() {
-        myPostsProfile.fetchMyPosts(currentId: userId) { (success, posts) in
+        self.myPostsProfile.fetchMyPosts(currentId: userId) { (success, posts) in
             if success, let post = posts {
                 self.posts.append(post)
                 self.profileUserCollectionView.reloadData()
             }
         }
+    }
+}
+
+extension ProfileUserViewController: HeaderProfileCollectionReusableViewDelegateSwitchSettingsVC {
+    //MARK: - Switch Settings VC
+    func goToSettingsVC() {
+        performSegue(withIdentifier: "ProfileUser_SettingSegue", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ProfileUser_SettingSegue" {
+            _ = segue.destination as? SettingsTableViewController
+        } else if segue.identifier == "ProfileUser_SegueDetail" {
+            let detailVC = segue.destination as? DetailViewController
+            detailVC?.postID = sender as? String ?? ""
+        }
+    }
+}
+
+extension ProfileUserViewController: PhotoCollectionViewCellDelegate {
+    func goToDetailVC(postID: String) {
+        performSegue(withIdentifier: "ProfileUser_SegueDetail", sender: postID)
     }
 }

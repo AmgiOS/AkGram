@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 //MARK: - Get Post JSON
 struct Post: Decodable {
@@ -40,16 +41,14 @@ struct User: Decodable {
     let id: String?
     
     //Get Following in Database
-    func isFollowing(completionHandler: @escaping (Bool?) -> Void) {
-        for uid in uidAllUsers {
-            refFollowers.child(uid).child(uidAccountUser).observeSingleEvent(of: .value, with: { (snapshot) in
-                if let _ = snapshot.value as? NSNull {
-                    completionHandler(false)
-                } else {
-                    completionHandler(true)
-                }
-            })
-        }
+    func isFollowing(uidUser: String, completionHandler: @escaping (Bool?) -> Void) {
+        refFollowers.child(uidUser).child(uidAccountUser).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let _ = snapshot.value as? NSNull {
+                completionHandler(false)
+            } else {
+                completionHandler(true)
+            }
+        })
     }
 }
 

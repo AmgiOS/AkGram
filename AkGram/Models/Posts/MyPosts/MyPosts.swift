@@ -17,7 +17,7 @@ class MyPosts {
     
     //MARK: - Functions
     func uploadRefMyPostsInDatabase() {
-        refDatabaseMyPosts.child(newUidPostWhenShare).setValue(true) { (error, ref) in
+        refDatabaseMyPosts.child(uidAccountUser).child(newUidPostWhenShare).setValue(true) { (error, ref) in
             guard error == nil else {
                 print("error upload post reference")
                 return
@@ -53,6 +53,19 @@ class MyPosts {
             } catch {
                 completionHandler(false, nil)
             }
+        }
+    }
+    
+    func observeMyPostsToDisplayInProfile(_ currentId: String, completionHandler: @escaping (String) -> Void) {
+        refDatabaseMyPosts.child(currentId).observe(.childAdded) { (snapshot) in
+            completionHandler(snapshot.key)
+        }
+    }
+    
+    func fetchMyCountPosts(_ userId: String, completion: @escaping (Int) -> Void) {
+        refDatabaseMyPosts.child(userId).observe(.value) { (snapshot) in
+            let count = Int(snapshot.childrenCount)
+            completion(count)
         }
     }
 }

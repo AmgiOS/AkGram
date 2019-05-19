@@ -37,7 +37,7 @@ class CameraViewController: UIViewController {
         guard let image = selectedImage else { return }
         guard let imageJPEG = UIImage.jpegData(image)(compressionQuality: 0.1) else {return}
         LoadingScreen()
-        ShareService.shared.sharePost(text, imageJPEG, onSuccess: { (success) in
+        ShareService.shared.sharePost(text, imageJPEG,onSuccess: { (success) in
             if success {
                 self.myPosts.uploadRefMyPostsInDatabase()
                 self.dismissLoadingScreen()

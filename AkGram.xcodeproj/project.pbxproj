@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7511A2AC0205E45741D26946 /* Pods_AkGramTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 407DB9662725A4D1D4E43FAA /* Pods_AkGramTests.framework */; };
+		990FFE5A228EF87C00CED4FB /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990FFE59228EF87C00CED4FB /* SettingsTableViewController.swift */; };
+		990FFE5C228F2C8B00CED4FB /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990FFE5B228F2C8B00CED4FB /* DetailViewController.swift */; };
 		9923C3402279B6CB00089340 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9923C33F2279B6CB00089340 /* PhotoCollectionViewCell.swift */; };
 		9923C3422279CBBA00089340 /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9923C3412279CBBA00089340 /* PeopleViewController.swift */; };
 		9923C3442279CC6400089340 /* PeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9923C3432279CC6400089340 /* PeopleTableViewCell.swift */; };
@@ -69,6 +71,8 @@
 		644BCE533ABB2559B1ED5C8C /* Pods-AkGramTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AkGramTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AkGramTests/Pods-AkGramTests.debug.xcconfig"; sourceTree = "<group>"; };
 		660B4B811CD086ADD97D18F1 /* Pods-AkGram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AkGram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AkGram/Pods-AkGram.debug.xcconfig"; sourceTree = "<group>"; };
 		735449089C87320EC91B0F30 /* Pods-AkGramTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AkGramTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AkGramTests/Pods-AkGramTests.release.xcconfig"; sourceTree = "<group>"; };
+		990FFE59228EF87C00CED4FB /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		990FFE5B228F2C8B00CED4FB /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		9923C33F2279B6CB00089340 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		9923C3412279CBBA00089340 /* PeopleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleViewController.swift; sourceTree = "<group>"; };
 		9923C3432279CC6400089340 /* PeopleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleTableViewCell.swift; sourceTree = "<group>"; };
@@ -318,8 +322,10 @@
 				99FC3A90221B7C04009F053B /* ActivityViewController.swift */,
 				99FC3A92221B7C11009F053B /* ProfileViewController.swift */,
 				9923C3412279CBBA00089340 /* PeopleViewController.swift */,
-				997A400A2288713D00FA4ADB /* SearchViewController.swift */,
 				994B66542289BE2100FD3241 /* ProfileUserViewController.swift */,
+				997A400A2288713D00FA4ADB /* SearchViewController.swift */,
+				990FFE59228EF87C00CED4FB /* SettingsTableViewController.swift */,
+				990FFE5B228F2C8B00CED4FB /* DetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -560,6 +566,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				990FFE5C228F2C8B00CED4FB /* DetailViewController.swift in Sources */,
 				997A400B2288713D00FA4ADB /* SearchViewController.swift in Sources */,
 				9923C3422279CBBA00089340 /* PeopleViewController.swift in Sources */,
 				997B7D01222364C7003E3A30 /* SignInService.swift in Sources */,
@@ -588,6 +595,7 @@
 				99F1C17F22243B79004E36FA /* LogOutService.swift in Sources */,
 				99327D6122296C6400E74B22 /* Constante.swift in Sources */,
 				99FC3A93221B7C11009F053B /* ProfileViewController.swift in Sources */,
+				990FFE5A228EF87C00CED4FB /* SettingsTableViewController.swift in Sources */,
 				995CF6A6222B486F00F8EBB9 /* CommentTableViewCell.swift in Sources */,
 				99327D692229F5D100E74B22 /* HomeTableViewCell.swift in Sources */,
 				99FC3A8F221B7BEC009F053B /* CameraViewController.swift in Sources */,

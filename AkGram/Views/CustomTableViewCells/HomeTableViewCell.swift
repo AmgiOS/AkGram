@@ -25,6 +25,7 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var shareImageView: UIImageView!
     @IBOutlet weak var likeCountButton: UIButton!
     @IBOutlet weak var captionLabel: UILabel!
+    @IBOutlet weak var heightConstraintPhoto: NSLayoutConstraint!
     
 
     override func awakeFromNib() {

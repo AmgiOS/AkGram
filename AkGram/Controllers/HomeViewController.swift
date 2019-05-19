@@ -24,14 +24,6 @@ class HomeViewController: UIViewController {
         connectedScreen()
         loadData()
     }
-    
-    //MARK: - @IBAction
-    @IBAction func logOutButton(_ sender: Any) {
-        LogOutService.shared.logOut()
-        let storyboard = UIStoryboard(name: "Start", bundle: nil)
-        let signInVC = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
-        self.present(signInVC, animated: true, completion: nil)
-    }
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
@@ -48,7 +40,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let post = postData[indexPath.row]
         cell.post = post
         
-        if userData.count > 1 {
+        if userData.count > 0 || userData.count > 1 {
             let user = userData[indexPath.row]
             cell.user = user
         }

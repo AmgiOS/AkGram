@@ -50,4 +50,49 @@ class SignUpService {
         let newUserReference = Database.database().reference().child("users").child(user)
         newUserReference.setValue(["username" : username, "username_lowercase": username.lowercased(), "email": email, "profileImage": profileImage, "id": id])
     }
+    
+    
+    //Update User Info when change in settings
+    func updateUserInfo(_ username: String, _ email: String, _ imageJPEG: Data, onSuccess: @escaping (Bool) -> Void, OnError: @escaping (String?) -> Void) {
+        Auth.auth().currentUser?.updateEmail(to: email, completion: { (error) in
+            guard error == nil else {
+                OnError(error?.localizedDescription)
+                return
+            }
+            let user = uidAccountUser
+            let storageRef = Storage.storage().reference(forURL: idStorage).child("profile_image").child(user)
+            storageRef.putData(imageJPEG, metadata: nil, completion: { (_, error) in
+                guard error == nil else {
+                    print("error upload image")
+                    OnError(error?.localizedDescription ?? "")
+                    onSuccess(false)
+                    return
+                }
+                
+                storageRef.downloadURL(completion: { (url, error) in
+                    guard let urlImage = url?.absoluteString, error == nil else {
+                        print("error upload data in storage")
+                        OnError(error?.localizedDescription ?? "")
+                        onSuccess(false)
+                        return
+                    }
+                    
+                    self.updateDatabaseInfo(username, email, urlImage, onSuccess: onSuccess, OnError: OnError)
+                    onSuccess(true)
+                })
+            })
+        })
+    }
+    
+    private func updateDatabaseInfo(_ username: String, _ email: String, _ imageJPEG: String, onSuccess: @escaping (Bool) -> Void, OnError: @escaping (String?) -> Void) {
+        let dict = ["username" : username, "username_lowercase": username.lowercased(), "email": email, "profileImage": imageJPEG] as [String : Any]
+        refDatabase.child("users").child(uidAccountUser).updateChildValues(dict) { (error, ref) in
+            guard error == nil else {
+                OnError(error?.localizedDescription)
+                onSuccess(false)
+                return
+            }
+            onSuccess(true)
+        }
+    }
 }

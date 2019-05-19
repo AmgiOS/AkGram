@@ -124,6 +124,7 @@
                                         <connections>
                                             <outlet property="captionLabel" destination="y5D-Me-bcF" id="G9a-Q9-Dwv"/>
                                             <outlet property="commentImageView" destination="jwI-ij-10G" id="RGe-KK-cWB"/>
+                                            <outlet property="heightConstraintPhoto" destination="pO4-eh-eDt" id="YHR-sU-bRg"/>
                                             <outlet property="likeCountButton" destination="nFt-cp-GZG" id="r5C-W2-0nc"/>
                                             <outlet property="likeImageView" destination="hfK-0e-vle" id="WIc-lW-12G"/>
                                             <outlet property="nameLabel" destination="JuR-b8-69L" id="nnG-Qg-m0u"/>
@@ -154,14 +155,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4Kv-u6-EXW"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="KD9-Gm-1cM">
-                        <barButtonItem key="leftBarButtonItem" title="LogOut" id="qGe-Zu-q8G">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="logOutButton:" destination="p0x-Sd-203" id="Qrc-6c-8De"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Home" id="KD9-Gm-1cM"/>
                     <connections>
                         <outlet property="activityIndicator" destination="oq2-As-OPc" id="O8F-oh-jps"/>
                         <outlet property="postsTableView" destination="kyc-Km-4tO" id="PX2-1v-ZdJ"/>
@@ -184,7 +178,7 @@
         <!--Comment View Controller-->
         <scene sceneID="L0D-3W-YTe">
             <objects>
-                <viewController id="YeE-yF-M7F" customClass="CommentViewController" customModule="AkGram" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CommentViewController" id="YeE-yF-M7F" customClass="CommentViewController" customModule="AkGram" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a43-nZ-cA3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

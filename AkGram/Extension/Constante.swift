@@ -26,7 +26,4 @@ var uidAccountUser: String {
 var newUidPostWhenShare = ""
 
 //Get Uid User Index Path
-var uidUserFollow = String()
-
-//all uid Users
-var uidAllUsers = [String]()
+var uidUserFollow: String? { didSet{}}

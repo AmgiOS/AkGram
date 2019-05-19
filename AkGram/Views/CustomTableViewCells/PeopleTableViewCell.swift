@@ -45,7 +45,11 @@ extension PeopleTableViewCell {
         profileImageView.sd_setImage(with: image, placeholderImage: UIImage(named: "placeholderImg"), options: .continueInBackground, progress: nil, completed: nil)
         nameLabel.text = user.username
         
-        user.isFollowing { (values) in
+        updateFollowUser()
+    }
+    
+    func updateFollowUser() {
+        users?.isFollowing(uidUser: users?.id ?? "") { (values) in
             DispatchQueue.main.async {
                 if let value = values, value {
                     self.configureButtonUnfollow()
@@ -55,20 +59,10 @@ extension PeopleTableViewCell {
             }
         }
     }
-    
-    @objc func followAction() {
-        followService.followUploadInDatabase()
-        configureButtonUnfollow()
-    }
-    
-    @objc func unFollowAction() {
-        followService.unFollowUploadInDatabase()
-        configureFollowButton()
-    }
 }
 
 extension PeopleTableViewCell {
-    //MARK: - Functions
+    //MARK: - Configure Button Follow
     private func configureButtonUnfollow() {
         followButton.setTitle("Following", for: .normal)
         followButton.setTitleColor(.black, for: .normal)
@@ -88,6 +82,16 @@ extension PeopleTableViewCell {
         button.layer.borderColor = UIColor(red: 226/255, green: 228/255, blue: 232.255, alpha: 1).cgColor
         button.layer.cornerRadius = 5
         button.clipsToBounds = true
+    }
+
+    @objc func followAction() {
+        followService.followUploadInDatabase()
+        configureButtonUnfollow()
+    }
+    
+    @objc func unFollowAction() {
+        followService.unFollowUploadInDatabase()
+        configureFollowButton()
     }
 }
 
