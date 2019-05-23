@@ -17,6 +17,8 @@ struct Post: Decodable {
     let idPost: String
     var likeCount: Int?
     var likes: [String: Bool]?
+    var videoUrl: String?
+    var timestamp: Int?
     var isLiked: Bool {
         get {
             var like = Bool()

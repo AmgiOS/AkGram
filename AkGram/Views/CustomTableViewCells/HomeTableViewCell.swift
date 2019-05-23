@@ -8,10 +8,14 @@
 
 import UIKit
 import SDWebImage
+import AVFoundation
+import KILabel
 
+//MARK: - Protocol
 protocol HomeTableViewCellDelegate {
     func commentToSegue(postId: String)
     func goToProfileUser(userUid: String)
+    func goToHashTag(tag: String)
 }
 
 class HomeTableViewCell: UITableViewCell {
@@ -24,23 +28,49 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var commentImageView: UIImageView!
     @IBOutlet weak var shareImageView: UIImageView!
     @IBOutlet weak var likeCountButton: UIButton!
-    @IBOutlet weak var captionLabel: UILabel!
+    @IBOutlet weak var captionLabel: KILabel!
     @IBOutlet weak var heightConstraintPhoto: NSLayoutConstraint!
+    @IBOutlet weak var volumeView: UIView!
+    @IBOutlet weak var timestampLabel: NSLayoutConstraint!
     
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        nameLabel.text = "User"
-        captionLabel.text = "Added comment ..."
+        nameLabel.text = ""
         GestureComment()
         GestureLike()
         GestureName()
     }
-
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        captionLabel.text = "Added comment ..."
+        volumeView.isHidden = true
+        playerLayer?.removeFromSuperlayer()
+        playerVideo?.pause()
+    }
+    
+    //MARK: - @IBAction
+    @IBAction func volumeActionbutton(_ sender: UIButton) {
+        if isMuted {
+            isMuted = !isMuted
+            sender.setImage(UIImage(named: "Icon_Volume"), for: .normal)
+        } else {
+            isMuted = !isMuted
+            sender.setImage(UIImage(named: "Icon_Mute"), for: .normal)
+        }
+        playerVideo?.isMuted = isMuted
+    }
+    
     //MARK: - Vars
     var delegate: HomeTableViewCellDelegate?
     var homeVC: HomeViewController?
     var likesService = LikesService()
+    var peopleUser = PeopleService()
+    
+    var playerVideo: AVPlayer?
+    var playerLayer: AVPlayerLayer?
+    var isMuted = true
     
     var post: Post? {
         didSet {
@@ -50,11 +80,7 @@ class HomeTableViewCell: UITableViewCell {
     
     var user: User? {
         didSet {
-            guard let user = user else { return }
-            self.nameLabel.text = user.username
-            
-            let image = URL(string: user.profileImage)
-            self.profileImageview.sd_setImage(with: image, placeholderImage: UIImage(named: "placeholderImg"), options: .continueInBackground, progress: nil, completed: nil)
+            updateViewUser()
         }
     }
 }
@@ -65,10 +91,49 @@ extension HomeTableViewCell {
         guard let post = post else { return }
         
         captionLabel.text = post.descriptionPhoto
+        captionLabel.hashtagLinkTapHandler = { label, string, range in
+            let tag = String(string.dropFirst())
+            self.delegate?.goToHashTag(tag: tag)
+        }
+        
+        captionLabel.userHandleLinkTapHandler = { label, string, range in
+            let mention = String(string.dropFirst())
+            self.peopleUser.getUserByUsername(username: mention, completionHandler: { (success, users) in
+                if success, let user = users {
+                    self.delegate?.goToProfileUser(userUid: user.id ?? "")
+                }
+            })
+        }
+        
         let image = URL(string: post.photoURL)
         postImageView.sd_setImage(with: image, completed: nil)
         
+        if let videoURL = post.videoUrl {
+            guard let video = URL(string: videoURL) else { return }
+            volumeView.isHidden = false
+            playerVideo = AVPlayer(url: video)
+            playerLayer = AVPlayerLayer(player: playerVideo)
+            playerLayer?.frame = postImageView.frame
+            playerLayer?.frame.size.width = UIScreen.main.bounds.width
+            self.contentView.layer.addSublayer(playerLayer ?? AVPlayerLayer())
+            volumeView.layer.zPosition = 1
+            playerVideo?.play()
+            playerVideo?.isMuted = isMuted
+        }
+        
+//        if let timestamp = post.timestamp {
+//            
+//        }
+        
         getLikesInDatabase(post)
+    }
+    
+    private func updateViewUser() {
+        guard let user = user else { return }
+        self.nameLabel.text = user.username
+        
+        let image = URL(string: user.profileImage)
+        self.profileImageview.sd_setImage(with: image, placeholderImage: UIImage(named: "placeholderImg"), options: .continueInBackground, progress: nil, completed: nil)
     }
     
     //MARK: - Likes

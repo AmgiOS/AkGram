@@ -76,6 +76,10 @@ extension DetailViewController: HomeTableViewCellDelegate {
         performSegue(withIdentifier: "Discover_Segue_Profile", sender: userUid)
     }
     
+    func goToHashTag(tag: String) {
+        performSegue(withIdentifier: "Detail_Segue_HashTag", sender: tag)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "commentSegue" {
             guard let commentVC = segue.destination as? CommentViewController else { return }
@@ -84,6 +88,10 @@ extension DetailViewController: HomeTableViewCellDelegate {
         } else if segue.identifier == "Discover_Segue_Profile" {
             guard let profileVC = segue.destination as? ProfileUserViewController else { return }
             profileVC.userId = sender as? String ?? ""
+            
+        } else if segue.identifier == "Detail_Segue_HashTag" {
+            guard let tagVC = segue.destination as? HashTagViewController else { return }
+            tagVC.hashTag = sender as? String ?? ""
         }
     }
 }

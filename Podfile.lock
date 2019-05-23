@@ -71,6 +71,7 @@ PODS:
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.2.1)
   - JGProgressHUD (2.0.3)
+  - KILabel (1.0.1)
   - leveldb-library (1.20)
   - libwebp (1.0.2):
     - libwebp/core (= 1.0.2)
@@ -113,6 +114,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - JGProgressHUD
+  - KILabel
   - SDWebImage/WebP
 
 SPEC REPOS:
@@ -130,6 +132,7 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMSessionFetcher
     - JGProgressHUD
+    - KILabel
     - leveldb-library
     - libwebp
     - nanopb
@@ -149,11 +152,12 @@ SPEC CHECKSUMS:
   GoogleUtilities: f1faafc033ea203adf1783ce00af455bb99d0e5b
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
+  KILabel: 4797807cdc0b4992dad8bf91175ddc973c3b569b
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   libwebp: b068a3bd7c45f7460f6715be7bed1a18fd5d6b48
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
 
-PODFILE CHECKSUM: a4fe143d94d8ae73beebd5406107a85186236aeb
+PODFILE CHECKSUM: b71592f5a0328d0cb0e39b3f408e948cd77f3a02
 
 COCOAPODS: 1.5.3

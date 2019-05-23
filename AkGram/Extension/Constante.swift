@@ -27,3 +27,27 @@ var newUidPostWhenShare = ""
 
 //Get Uid User Index Path
 var uidUserFollow: String? { didSet{}}
+
+//All Filters for Camera
+var allFilters = [
+    "CIColorCrossPolynomial",
+    "CIColorCube",
+    "CIColorCubeWithColorSpace",
+    "CIColorInvert",
+    "CIColorMonochrome",
+    "CIColorPosterize",
+    "CIFalseColor",
+    "CIMaskToAlpha",
+    "CIMaximumComponent",
+    "CIMinimumComponent",
+    "CIPhotoEffectChrome",
+    "CIPhotoEffectFade",
+    "CIPhotoEffectInstant",
+    "CIPhotoEffectMono",
+    "CIPhotoEffectNoir",
+    "CIPhotoEffectProcess",
+    "CIPhotoEffectTonal",
+    "CIPhotoEffectTransfer",
+    "CISepiaTone",
+    "CIVignette",
+]

@@ -13,6 +13,7 @@ target 'AkGram' do
     pod 'JGProgressHUD'
     pod 'CodableFirebase'
     pod 'SDWebImage/WebP'
+    pod 'KILabel'
     
   target 'AkGramTests' do
     inherit! :search_paths

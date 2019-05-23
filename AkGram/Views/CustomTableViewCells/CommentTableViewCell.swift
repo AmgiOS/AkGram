@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import KILabel
 
 protocol CommentTableViewCellDelegate {
     func goToProfileUser(userId: String)
+    func goToHashTag(tag: String)
 }
 
 class CommentTableViewCell: UITableViewCell {
@@ -17,7 +19,7 @@ class CommentTableViewCell: UITableViewCell {
     //MARK: - @IBOutlet
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet weak var commentLabel: KILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,21 +30,40 @@ class CommentTableViewCell: UITableViewCell {
     
     //MARK: - Vars
     var postService = LoadPostService()
+    var peopleUser = PeopleService()
     var commentVC: CommentViewController?
     var delegate: CommentTableViewCellDelegate?
     
     var comment: Comment? {
         didSet{
-            guard let comment = comment else { return }
-            commentLabel.text = comment.commentText
-            loadUserInfo(comment.uid)
+            updateView()
         }
     }
 }
 
 extension CommentTableViewCell {
+    //MARK: - UpdateView
+    private func updateView() {
+        guard let comment = comment else { return }
+        commentLabel.text = comment.commentText
+        commentLabel.hashtagLinkTapHandler = { label, string, range in
+            let tag = String(string.dropFirst())
+            self.delegate?.goToHashTag(tag: tag)
+        }
+        
+        commentLabel.userHandleLinkTapHandler = { label, string, range in
+            let mention = String(string.dropFirst())
+            self.peopleUser.getUserByUsername(username: mention, completionHandler: { (success, users) in
+                if success, let user = users {
+                    self.delegate?.goToProfileUser(userId: user.id ?? "")
+                }
+            })
+        }
+        
+        loadUserInfo(comment.uid)
+    }
     
-    //MARK: - Functions
+    //MARK: - Load User Info
     private func loadUserInfo(_ currentUser: String) {
         postService.setUpUserInfo(currentUser) { (success, user) in
             if success, let user = user {

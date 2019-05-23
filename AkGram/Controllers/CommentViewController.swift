@@ -131,10 +131,18 @@ extension CommentViewController: CommentTableViewCellDelegate {
         performSegue(withIdentifier: "Comment_Segue_Profile", sender: userId)
     }
     
+    func goToHashTag(tag: String) {
+        performSegue(withIdentifier: "Comment_Segue_HashTag", sender: tag)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Comment_Segue_Profile" {
             guard let profileVC = segue.destination as? ProfileUserViewController else { return }
             profileVC.userId = sender as? String ?? ""
+            
+        } else if segue.identifier == "Comment_Segue_HashTag" {
+            guard let hashTagVC = segue.destination as? HashTagViewController else { return }
+            hashTagVC.hashTag = sender as? String ?? ""
         }
     }
 }

@@ -18,6 +18,16 @@ class CommentService {
         let newCommentReference = newUserReference.child(newCommentID)
         guard let currentUserId = Auth.auth().currentUser?.uid else { return }
         
+        let words = comment.components(separatedBy:  .whitespacesAndNewlines)
+        
+        for var word in words {
+            if word.hasPrefix("#") {
+                word = word.trimmingCharacters(in: .punctuationCharacters)
+                let newHashTagRef = refDatabase.child("hashTag").child(word.lowercased())
+                newHashTagRef.updateChildValues([idPost: true])
+            }
+        }
+        
         newCommentReference.setValue(["uid": currentUserId ,"commentText" : comment]) { (error, reference) in
             guard error == nil else {
                 print("error upload image and Description")

@@ -47,4 +47,18 @@ class PeopleService {
             })
         }
     }
+    
+    func getUserByUsername(username: String, completionHandler: @escaping (Bool, User?) -> Void) {
+        getAllUsers.queryOrdered(byChild: "username_lowercase").queryEqual(toValue: username).observeSingleEvent(of: .childAdded) { (snapshot) in
+            guard let value = snapshot.value else { return }
+            
+            do {
+                let data = try FirebaseDecoder().decode(User.self, from: value)
+                completionHandler(true, data)
+            } catch {
+                completionHandler(false, nil)
+                print("Error to get User with tag")
+            }
+        }
+    }
 }
