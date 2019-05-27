@@ -31,15 +31,16 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var captionLabel: KILabel!
     @IBOutlet weak var heightConstraintPhoto: NSLayoutConstraint!
     @IBOutlet weak var volumeView: UIView!
-    @IBOutlet weak var timestampLabel: NSLayoutConstraint!
+    @IBOutlet weak var timestampLabel: UILabel!
+    @IBOutlet weak var volumeButton: UIButton!
     
-
     override func awakeFromNib() {
         super.awakeFromNib()
         nameLabel.text = ""
         GestureComment()
         GestureLike()
         GestureName()
+        gesturePostsVideo()
     }
     
     override func prepareForReuse() {
@@ -108,23 +109,8 @@ extension HomeTableViewCell {
         let image = URL(string: post.photoURL)
         postImageView.sd_setImage(with: image, completed: nil)
         
-        if let videoURL = post.videoUrl {
-            guard let video = URL(string: videoURL) else { return }
-            volumeView.isHidden = false
-            playerVideo = AVPlayer(url: video)
-            playerLayer = AVPlayerLayer(player: playerVideo)
-            playerLayer?.frame = postImageView.frame
-            playerLayer?.frame.size.width = UIScreen.main.bounds.width
-            self.contentView.layer.addSublayer(playerLayer ?? AVPlayerLayer())
-            volumeView.layer.zPosition = 1
-            playerVideo?.play()
-            playerVideo?.isMuted = isMuted
-        }
-        
-//        if let timestamp = post.timestamp {
-//            
-//        }
-        
+        postVideo()
+        calculDataToPost()
         getLikesInDatabase(post)
     }
     
@@ -144,6 +130,52 @@ extension HomeTableViewCell {
             likeCountButton.setTitle("\(likeCount) likes", for: .normal)
         } else {
             likeCountButton.setTitle("Be the First like this", for: .normal)
+        }
+    }
+    
+    //MARK: - Post Video
+    private func postVideo() {
+        if let videoURL = post?.videoUrl {
+            guard let video = URL(string: videoURL) else { return }
+            volumeView.isHidden = false
+            playerVideo = AVPlayer(url: video)
+            playerLayer = AVPlayerLayer(player: playerVideo)
+            playerLayer?.frame = postImageView.frame
+            playerLayer?.frame.size.width = UIScreen.main.bounds.width
+            self.contentView.layer.addSublayer(playerLayer ?? AVPlayerLayer())
+            volumeView.layer.zPosition = 1
+            playerVideo?.play()
+            playerVideo?.isMuted = isMuted
+        }
+    }
+    
+    //MARK: - Date To post
+    private func calculDataToPost() {
+        if let timestamp = post?.timestamp {
+            let timestampData = Date(timeIntervalSince1970: Double(timestamp))
+            let now = Date()
+            let components = Set<Calendar.Component>([.second, .minute, .hour, .day, .weekOfMonth])
+            let diff = Calendar.current.dateComponents(components, from: timestampData, to: now)
+            
+            var timeText = ""
+            
+            if let second = diff.second, second <= 0 {
+                timeText = "Now"
+            }
+            
+            if diff.second ?? 0 > 0 && diff.minute ?? 0 == 0 {
+                timeText = (diff.second ?? 0 == 1) ? "\(diff.second ?? 0 ) second ago" : "\(diff.second ?? 0) seconds ago"
+            } else if diff.minute ?? 0 > 0 && diff.hour ?? 0 == 0 {
+                timeText = (diff.minute ?? 0 == 1) ? "\(diff.minute ?? 0 ) minute ago" : "\(diff.minute ?? 0) minutes ago"
+            } else if diff.hour ?? 0 > 0 && diff.day ?? 0 == 0 {
+                timeText = (diff.hour ?? 0 == 1) ? "\(diff.hour ?? 0 ) hour ago" : "\(diff.hour ?? 0) hours ago"
+            } else if diff.day ?? 0 > 0 && diff.weekOfMonth ?? 0 == 0 {
+                timeText = (diff.day ?? 0 == 1) ? "\(diff.day ?? 0 ) day ago" : "\(diff.day ?? 0) days ago"
+            } else if diff.weekOfMonth ?? 0 > 0 {
+                timeText = (diff.weekOfMonth ?? 0 == 1) ? "\(diff.weekOfMonth ?? 0 ) week ago" : "\(diff.weekOfMonth ?? 0) weeks ago"
+            }
+            
+            timestampLabel.text = timeText
         }
     }
 }
@@ -187,6 +219,24 @@ extension HomeTableViewCell {
     
     @objc func tapGestureName() {
         delegate?.goToProfileUser(userUid: user?.id ?? "")
+    }
+    
+    //MARK: - TapGestureRecongnizerPostVideo
+    private func gesturePostsVideo() {
+        postImageView.isUserInteractionEnabled = true
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGesturePostsVideo))
+        postImageView.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    @objc func tapGesturePostsVideo() {
+        if isMuted {
+            isMuted = !isMuted
+            volumeButton.setImage(UIImage(named: "Icon_Volume"), for: .normal)
+        } else {
+            isMuted = !isMuted
+            volumeButton.setImage(UIImage(named: "Icon_Mute"), for: .normal)
+        }
+        playerVideo?.isMuted = isMuted
     }
 }
 

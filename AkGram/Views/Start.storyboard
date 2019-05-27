@@ -1,15 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9pF-At-NST">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9pF-At-NST">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Walkthrough Page View Controller-->
+        <scene sceneID="sqH-jr-ftX">
+            <objects>
+                <viewController storyboardIdentifier="WalkthroughPageViewController" modalTransitionStyle="crossDissolve" id="o9N-kw-Dgn" customClass="WalkthroughPageViewController" customModule="AkGram" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wpc-gS-XHr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1060" y="114"/>
+        </scene>
+        <!--Walkthrough View Controller-->
+        <scene sceneID="H1m-tR-hON">
+            <objects>
+                <viewController storyboardIdentifier="WalkthroughViewController" id="vA8-Ua-gTN" customClass="WalkthroughViewController" customModule="AkGram" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9S5-N7-kk4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background1" translatesAutoresizingMaskIntoConstraints="NO" id="CJK-5j-EcG">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AkGram" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oYo-eg-WXj">
+                                <rect key="frame" x="112.5" y="70" width="150.5" height="60"/>
+                                <fontDescription key="fontDescription" name="NotoSansChakma-Regular" family="Noto Sans Chakma" pointSize="41"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to a new Instagram will created by Amg" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTh-su-DX6">
+                                <rect key="frame" x="15" y="497" width="345" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="xXI-xZ-2nH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="NotoSansChakma-Regular" family="Noto Sans Chakma" pointSize="17"/>
+                                <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ypS-41-56u">
+                                <rect key="frame" x="320" y="607" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="HKp-au-f99"/>
+                                    <constraint firstAttribute="width" constant="40" id="vYk-Ag-xbz"/>
+                                </constraints>
+                                <state key="normal" image="arrow"/>
+                                <connections>
+                                    <action selector="slidePageButton:" destination="vA8-Ua-gTN" eventType="touchUpInside" id="0CE-NA-Hh4"/>
+                                </connections>
+                            </button>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Eec-uf-Af2">
+                                <rect key="frame" x="168" y="610" width="39" height="37"/>
+                            </pageControl>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qfb-xM-WwW" firstAttribute="trailing" secondItem="CJK-5j-EcG" secondAttribute="trailing" id="0DB-GG-BkW"/>
+                            <constraint firstItem="qfb-xM-WwW" firstAttribute="bottom" secondItem="OTh-su-DX6" secondAttribute="bottom" constant="120" id="6PI-uU-xkM"/>
+                            <constraint firstItem="oYo-eg-WXj" firstAttribute="top" secondItem="qfb-xM-WwW" secondAttribute="top" constant="50" id="6RV-id-8s8"/>
+                            <constraint firstItem="CJK-5j-EcG" firstAttribute="top" secondItem="qfb-xM-WwW" secondAttribute="top" id="8ZB-sp-L4Q"/>
+                            <constraint firstItem="qfb-xM-WwW" firstAttribute="trailing" secondItem="ypS-41-56u" secondAttribute="trailing" constant="15" id="8wX-WX-19S"/>
+                            <constraint firstItem="CJK-5j-EcG" firstAttribute="leading" secondItem="qfb-xM-WwW" secondAttribute="leading" id="Exq-Dd-L9b"/>
+                            <constraint firstItem="qfb-xM-WwW" firstAttribute="bottom" secondItem="CJK-5j-EcG" secondAttribute="bottom" id="KHG-ny-ZaA"/>
+                            <constraint firstItem="OTh-su-DX6" firstAttribute="leading" secondItem="qfb-xM-WwW" secondAttribute="leading" constant="15" id="KcJ-ix-1af"/>
+                            <constraint firstItem="qfb-xM-WwW" firstAttribute="bottom" secondItem="ypS-41-56u" secondAttribute="bottom" constant="20" id="Kqq-6A-oUP"/>
+                            <constraint firstItem="qfb-xM-WwW" firstAttribute="bottom" secondItem="Eec-uf-Af2" secondAttribute="bottom" constant="20" id="TBc-LH-2RT"/>
+                            <constraint firstItem="OTh-su-DX6" firstAttribute="centerX" secondItem="9S5-N7-kk4" secondAttribute="centerX" id="gO2-3h-bhJ"/>
+                            <constraint firstItem="Eec-uf-Af2" firstAttribute="centerX" secondItem="9S5-N7-kk4" secondAttribute="centerX" id="otV-FX-3da"/>
+                            <constraint firstItem="oYo-eg-WXj" firstAttribute="centerX" secondItem="9S5-N7-kk4" secondAttribute="centerX" id="r7L-nv-JhV"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="qfb-xM-WwW"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="UHd-7n-WRc"/>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="CJK-5j-EcG" id="q6j-Ic-cUf"/>
+                        <outlet property="contentLabel" destination="OTh-su-DX6" id="NsY-a2-eZz"/>
+                        <outlet property="nextButton" destination="ypS-41-56u" id="2Bu-T4-KhX"/>
+                        <outlet property="pageControl" destination="Eec-uf-Af2" id="CG0-yh-4tM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qnl-Ci-Vgw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-295" y="114"/>
+        </scene>
         <!--Sign In View Controller-->
         <scene sceneID="zBW-7e-d0K">
             <objects>
@@ -96,7 +175,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9D8-uB-MKB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="292" y="-125"/>
+            <point key="canvasLocation" x="1231.2" y="-125.4872563718141"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="hfr-0b-GWo">
@@ -193,7 +272,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pfW-au-2Vi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="292" y="647"/>
+            <point key="canvasLocation" x="1231.2" y="646.32683658170924"/>
         </scene>
         <!--TabBarID-->
         <scene sceneID="gWt-RA-DZY">
@@ -201,13 +280,15 @@
                 <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="TabBarID" id="lNs-Xj-2bR" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0ZE-Vk-uOP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1409" y="115"/>
+            <point key="canvasLocation" x="2347.1999999999998" y="114.24287856071965"/>
         </scene>
     </scenes>
     <resources>
+        <image name="arrow" width="24" height="20"/>
+        <image name="background1" width="1242" height="2208"/>
         <image name="placeholderImg" width="225" height="225"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jvQ-96-KH0"/>
+        <segue reference="lmN-Lj-LrN"/>
     </inferredMetricsTieBreakers>
 </document>

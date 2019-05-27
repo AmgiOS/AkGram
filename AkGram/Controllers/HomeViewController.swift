@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class HomeViewController: UIViewController {
     //MARK: - Vars
@@ -14,6 +15,7 @@ class HomeViewController: UIViewController {
     var postService = LoadPostService()
     var postData = [Post]()
     var userData = [User]()
+    var user: User?
     
     //MARK: - @IBOutlet
     @IBOutlet weak var postsTableView: UITableView!
@@ -40,10 +42,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let post = postData[indexPath.row]
         cell.post = post
         
-        if userData.count > 0 || userData.count > 1 {
+        if userData.count <= 1 {
+            cell.user = user
+        } else {
             let user = userData[indexPath.row]
             cell.user = user
         }
+        
         
         cell.homeVC = self
         cell.delegate = self
@@ -59,8 +64,8 @@ extension HomeViewController {
         feedService.uploadFeed { (success, posts) in
             if success, let post = posts {
                 self.activityIndicator.isHidden = true
-                self.postData.insert(post, at: 0)
                 self.loadUserInfo(post.uid)
+                self.postData.insert(post, at: 0)
                 self.postsTableView.reloadData()
             }
         }
@@ -78,6 +83,7 @@ extension HomeViewController {
     func loadUserInfo(_ currentUserPost: String) {
         postService.setUpUserInfo(currentUserPost) { (success, user) in
             if success, let user = user {
+                self.user = user
                 self.userData.insert(user, at: 0)
                 self.postsTableView.reloadData()
             }
@@ -113,6 +119,5 @@ extension HomeViewController: HomeTableViewCellDelegate {
             guard let tagVC = segue.destination as? HashTagViewController else { return }
             tagVC.hashTag = sender as? String ?? ""
         }
-        
     }
 }

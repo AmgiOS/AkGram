@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseStorage
+import FirebaseDatabase
 
 class ShareService {
     private init() {}
@@ -73,7 +74,7 @@ class ShareService {
             }
         }
         
-        let timestamp = Int(Date.timeIntervalBetween1970AndReferenceDate)
+        let timestamp = Int(Date().timeIntervalSince1970)
         
         
         var dict = ["uid": currentUserId ,"photoURL" : photoUrl, "descriptionPhoto": description, "idPost": newPostsID, "likeCount": 0, "timestamp": timestamp] as [String : Any]
@@ -88,9 +89,11 @@ class ShareService {
                 onSuccess(false)
                 return
             }
+            refDatabase.child("feed").child(currentUser.uid).child(newPostsID).setValue(true)
+            
+            self.uploadNotification(currentUser.uid, newPostsID, timestamp)
             
             onSuccess(true)
-            refDatabase.child("feed").child(uidAccountUser).child(newPostsID).setValue(true)
             print("success to share post")
         }
     }
@@ -116,5 +119,18 @@ extension ShareService {
                 onSuccess(videoUrl)
             })
         }
+    }
+    
+    //MARK: - Add Notification in Database when Share Post
+    private func uploadNotification(_ currentUser: String, _ newPostsID: String, _ timestamp: Int) {
+        refFollowers.child(uidAccountUser).observeSingleEvent(of: .value, with: { (snapshot) in
+            let arraySnapshot = snapshot.children.allObjects as? [DataSnapshot]
+            arraySnapshot?.forEach({ (child) in
+                refDatabase.child("feed").child(child.key).updateChildValues(["\(newPostsID)": true])
+                let newNotificationId = refDatabase.child("notification").child(child.key).childByAutoId().key ?? ""
+                let newNotificationReference = refDatabase.child("notification").child(child.key).child(newNotificationId)
+                newNotificationReference.setValue(["from" : currentUser, "type": "feed", "objectId": newPostsID, "timestamp": timestamp])
+            })
+        })
     }
 }

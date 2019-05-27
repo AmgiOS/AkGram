@@ -68,7 +68,9 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
             photoImageView.image = originalImage
             selectedImage = originalImage
             dismiss(animated: true) {
+                self.LoadingScreen()
                 self.performSegue(withIdentifier: "Camera_FilterSegue", sender: originalImage)
+                self.dismissLoadingScreen()
             }
             
             //Select Video

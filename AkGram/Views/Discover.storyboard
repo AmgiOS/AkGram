@@ -173,7 +173,7 @@
                                                     </state>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYb-fZ-QpU" customClass="KILabel">
-                                                    <rect key="frame" x="10" y="461" width="355" height="14"/>
+                                                    <rect key="frame" x="10" y="461" width="355" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -247,7 +247,8 @@
                                             <outlet property="postImageView" destination="WFt-E0-CgH" id="6gB-FS-vsm"/>
                                             <outlet property="profileImageview" destination="ir3-VH-zd0" id="w9c-BL-vEa"/>
                                             <outlet property="shareImageView" destination="SD4-pU-TGh" id="sTO-HE-Ni2"/>
-                                            <outlet property="timestampLabel" destination="K6w-Bb-97n" id="dAh-Ro-cld"/>
+                                            <outlet property="timestampLabel" destination="K6w-Bb-97n" id="GIA-oD-s8t"/>
+                                            <outlet property="volumeButton" destination="b8A-Xr-dxD" id="cfJ-oH-Eix"/>
                                             <outlet property="volumeView" destination="XRg-U3-Dzk" id="W59-FN-dRY"/>
                                         </connections>
                                     </tableViewCell>

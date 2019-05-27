@@ -58,3 +58,11 @@ struct User: Decodable {
 struct Comment: Decodable {
     let commentText, uid: String
 }
+
+
+struct NotificationApi: Decodable {
+    let from: String
+    let objectId: String
+    let type: String
+    var timestamp: Int?
+}

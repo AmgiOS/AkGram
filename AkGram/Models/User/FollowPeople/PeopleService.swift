@@ -38,7 +38,6 @@ class PeopleService {
                 
                 do {
                     let data = try FirebaseDecoder().decode(User.self, from: values.value ?? "")
-                    print(data)
                     completionHandler(true, data, values.key)
                 } catch {
                     completionHandler(false, nil, "")

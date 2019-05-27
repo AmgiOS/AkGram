@@ -26,6 +26,7 @@ class SignInViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        checkStartingVC()
         checkStatusUser()
     }
     
@@ -68,6 +69,14 @@ extension SignInViewController {
         signInService.checkIfUserIsAlreadyOnline { (success) in
             if success {
                 self.performSegue(withIdentifier: "signInToTabBar", sender: nil)
+            }
+        }
+    }
+    
+    private func checkStartingVC() {
+        if UserDefaults.standard.bool(forKey: "hasViewviedWalkthrough") != true {
+            if let startingVC = storyboard?.instantiateViewController(withIdentifier: "WalkthroughPageViewController") as? WalkthroughPageViewController {
+                present(startingVC, animated: true, completion: nil)
             }
         }
     }
