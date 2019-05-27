@@ -13,7 +13,7 @@
         <!--Profile View Controller-->
         <scene sceneID="W7e-DT-AlI">
             <objects>
-                <viewController id="ip3-U9-5bb" customClass="ProfileViewController" customModule="AkGram" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" id="ip3-U9-5bb" customClass="ProfileViewController" customModule="AkGram" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gZO-jd-p34">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -224,7 +224,7 @@
         <!--People View Controller-->
         <scene sceneID="cMB-E8-wvH">
             <objects>
-                <viewController id="BsN-zI-IYJ" customClass="PeopleViewController" customModule="AkGram" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PeopleViewController" id="BsN-zI-IYJ" customClass="PeopleViewController" customModule="AkGram" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="snB-aS-fzM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -316,7 +316,7 @@
         <!--Settings Table View Controller-->
         <scene sceneID="HBL-6d-6Hi">
             <objects>
-                <tableViewController id="Mzz-ZE-GtW" customClass="SettingsTableViewController" customModule="AkGram" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SettingsTableViewController" id="Mzz-ZE-GtW" customClass="SettingsTableViewController" customModule="AkGram" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="TXc-P5-81n">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -519,7 +519,7 @@
         <!--Navigation Controller-->
         <scene sceneID="aK6-nC-PqG">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="X3F-OD-GTP" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="l" automaticallyAdjustsScrollViewInsets="NO" id="X3F-OD-GTP" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="BiR-zg-gXr">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -741,8 +741,8 @@
         <image name="placeholderImg" width="225" height="225"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GnA-n5-auh"/>
-        <segue reference="CHZ-i5-dG1"/>
-        <segue reference="4M0-h2-UDU"/>
+        <segue reference="Nbd-1g-aIT"/>
+        <segue reference="7Wg-Qd-AjR"/>
+        <segue reference="u1f-eA-jjD"/>
     </inferredMetricsTieBreakers>
 </document>
